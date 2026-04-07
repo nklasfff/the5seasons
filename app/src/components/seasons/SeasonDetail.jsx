@@ -3,6 +3,7 @@ import { useSeason } from '../../context/SeasonContext';
 import SeasonNav from '../common/SeasonNav';
 import GlassCard from '../common/GlassCard';
 import Expandable from '../common/Expandable';
+import SeasonSymbol from '../illustrations/SeasonSymbol';
 import styles from './SeasonDetail.module.css';
 
 export default function SeasonDetail() {
@@ -17,8 +18,11 @@ export default function SeasonDetail() {
     <div style={{ '--accent': season.color, '--accent-light': season.lightColor, '--accent-glow': season.glowColor }}>
       <SeasonNav currentId={id} />
 
-      {/* Hero header with glowing character */}
+      {/* Hero header with animated season symbol */}
       <div className={`${styles.header} animate-fade-up`}>
+        <div className={styles.symbolWrap}>
+          <SeasonSymbol seasonId={season.id} color={season.color} size={140} />
+        </div>
         <div className={styles.bigChar} style={{ color: season.color }}>
           {season.chineseChar}
         </div>

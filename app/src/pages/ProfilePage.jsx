@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useSeason } from '../context/SeasonContext';
-import ElementCircle from '../components/illustrations/ElementCircle';
+import JourneyArc from '../components/illustrations/JourneyArc';
 import GlassCard from '../components/common/GlassCard';
 import Expandable from '../components/common/Expandable';
 
@@ -23,9 +23,9 @@ export default function ProfilePage() {
         </p>
       </div>
 
-      {/* Element Circle illustration */}
+      {/* Journey Arc — unique to profile */}
       <div className="animate-scale-in">
-        <ElementCircle size={220} />
+        <JourneyArc size={300} />
       </div>
 
       {/* Current season */}

@@ -3,6 +3,10 @@
   margin-bottom: var(--space-lg);
 }
 
+.symbolWrap {
+  margin: 0 auto var(--space-sm);
+}
+
 .bigChar {
   font-size: 4rem;
   font-weight: 300;
