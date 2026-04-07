@@ -6,6 +6,10 @@
   font-size: 0.85rem;
   margin-bottom: var(--space-md);
   cursor: pointer;
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  transition: color var(--transition-fast);
 }
 
 .back:hover {
@@ -21,9 +25,39 @@
   text-align: center;
 }
 
+.durationRow {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.durationBtn {
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+.durationBtn:hover {
+  color: var(--text-primary);
+}
+
+.durationActive {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-glow);
+}
+
 .breatheCircle {
-  width: 160px;
-  height: 160px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   margin: var(--space-lg) auto;
   display: flex;
@@ -33,7 +67,7 @@
   font-size: 1.2rem;
   font-weight: 300;
   color: var(--accent);
-  transition: transform 4s ease-in-out, opacity 4s ease-in-out;
+  transition: transform 4s ease-in-out, opacity 4s ease-in-out, box-shadow 0.5s ease;
 }
 
 .breatheCircle.inhale {
@@ -68,6 +102,9 @@
   font-weight: 500;
   letter-spacing: 0.04em;
   transition: opacity var(--transition-fast);
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
 }
 
 .btnPrimary {
@@ -80,10 +117,20 @@
   color: var(--text-primary);
 }
 
-.instruction {
-  text-align: center;
-  margin-top: var(--space-lg);
-  font-size: 0.9rem;
+.instructionLabel {
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   color: var(--text-secondary);
-  line-height: 1.7;
+  margin-bottom: var(--space-sm);
+}
+
+.instruction {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--text-bright);
 }

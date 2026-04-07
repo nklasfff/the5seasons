@@ -1,6 +1,8 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useSeason } from '../../context/SeasonContext';
+import SeasonNav from '../common/SeasonNav';
 import GlassCard from '../common/GlassCard';
+import Expandable from '../common/Expandable';
 import styles from './SeasonDetail.module.css';
 
 export default function SeasonDetail() {
@@ -13,91 +15,123 @@ export default function SeasonDetail() {
 
   return (
     <div style={{ '--accent': season.color, '--accent-light': season.lightColor, '--accent-glow': season.glowColor }}>
-      <button className={styles.back} onClick={() => navigate('/saesoner')}>
-        ‹ Sæsoner
-      </button>
+      <SeasonNav currentId={id} />
 
+      {/* Hero header with glowing character */}
       <div className={`${styles.header} animate-fade-up`}>
-        <div className={styles.circle} style={{ background: season.color }}>
+        <div className={styles.bigChar} style={{ color: season.color }}>
           {season.chineseChar}
         </div>
         <h1 className={styles.name}>{season.name}</h1>
         <p className={styles.meta}>{season.element} · {season.monthLabel} · {season.direction}</p>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-        <GlassCard className="animate-fade-up-delay-1" glowColor={season.glowColor}>
-          <div className={styles.section}>
-            <p className={styles.sectionLabel}>Om denne sæson</p>
-            <p className={styles.sectionText}>{season.description}</p>
+      {/* Quick correspondences */}
+      <GlassCard className="animate-fade-up-delay-1" glowColor={season.glowColor}>
+        <div className={styles.correspondences}>
+          <div className="correspondence-row">
+            <span className="correspondence-label">Element</span>
+            <span className="correspondence-value">{season.element}</span>
           </div>
-        </GlassCard>
+          <div className="correspondence-row">
+            <span className="correspondence-label">Retning</span>
+            <span className="correspondence-value">{season.direction}</span>
+          </div>
+          <div className="correspondence-row">
+            <span className="correspondence-label">Smag</span>
+            <span className="correspondence-value">{season.flavor}</span>
+          </div>
+          <div className="correspondence-row">
+            <span className="correspondence-label">Klima</span>
+            <span className="correspondence-value">{season.climate}</span>
+          </div>
+          <div className="correspondence-row">
+            <span className="correspondence-label">Væv</span>
+            <span className="correspondence-value">{season.tissue}</span>
+          </div>
+        </div>
+      </GlassCard>
 
-        <GlassCard glowColor={season.glowColor}>
-          <p className={styles.sectionLabel}>Organer</p>
+      <div className={styles.sections}>
+        {/* Om sæsonen - default open */}
+        <Expandable title="Om denne sæson" subtitle={season.monthLabel} defaultOpen glowColor={season.glowColor}>
+          <p className={styles.sectionText}>{season.description}</p>
+          <ul className="left-border-list" style={{ marginTop: 'var(--space-md)' }}>
+            {season.themes.map(t => <li key={t}>{t}</li>)}
+          </ul>
+        </Expandable>
+
+        {/* Organer */}
+        <Expandable title="Organer" subtitle={`${season.organs.yin} · ${season.organs.yang}`} glowColor={season.glowColor}>
           <div className={styles.organsGrid}>
             <div className={styles.organBox}>
               <p className={styles.organType}>Yin</p>
               <p className={styles.organName}>{season.organs.yin}</p>
+              <p className={styles.organTime}>{season.organClockYin.label}</p>
             </div>
             <div className={styles.organBox}>
               <p className={styles.organType}>Yang</p>
               <p className={styles.organName}>{season.organs.yang}</p>
+              <p className={styles.organTime}>{season.organClockYang.label}</p>
             </div>
           </div>
-          <div style={{ marginTop: 'var(--space-sm)', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-            {season.tissue} · Smag: {season.flavor} · Klima: {season.climate}
-          </div>
-        </GlassCard>
+        </Expandable>
 
-        <GlassCard glowColor={season.glowColor}>
-          <p className={styles.sectionLabel}>Følelser</p>
+        {/* Følelser */}
+        <Expandable title="Følelser" subtitle={season.emotion.balanced} glowColor={season.glowColor}>
           <div className={styles.emotionRow}>
-            <div className={styles.emotionBox}>
+            <div className={styles.emotionBox} style={{ borderLeft: `3px solid ${season.color}` }}>
               <p className={styles.emotionType}>I balance</p>
               <p className={styles.emotionText}>{season.emotion.balanced}</p>
             </div>
-            <div className={styles.emotionBox}>
+            <div className={styles.emotionBox} style={{ borderLeft: '3px solid var(--border)' }}>
               <p className={styles.emotionType}>Ubalance</p>
               <p className={styles.emotionText}>{season.emotion.imbalanced}</p>
             </div>
           </div>
-        </GlassCard>
+        </Expandable>
 
-        <GlassCard glowColor={season.glowColor}>
-          <p className={styles.sectionLabel}>Fødevarer</p>
+        {/* Fødevarer */}
+        <Expandable title="Fødevarer" subtitle={`Smag: ${season.flavor}`} glowColor={season.glowColor}>
           <div className={styles.foodList}>
             {season.foods.map(f => (
               <span key={f} className={styles.foodTag}>{f}</span>
             ))}
           </div>
-        </GlassCard>
+        </Expandable>
 
-        <GlassCard glowColor={season.glowColor}>
-          <div className={styles.section}>
-            <p className={styles.sectionLabel}>Yoga</p>
-            <p className={styles.sectionText}>{season.yoga}</p>
-          </div>
-        </GlassCard>
+        {/* Yoga */}
+        <Expandable title="Yoga" subtitle="Sæsonens bevægelse" glowColor={season.glowColor}>
+          <p className={styles.sectionText}>{season.yoga}</p>
+        </Expandable>
 
-        <GlassCard glowColor={season.glowColor}>
-          <div className={styles.section}>
-            <p className={styles.sectionLabel}>Åndedræt</p>
-            <p className={styles.sectionText}>{season.breathing}</p>
-          </div>
-        </GlassCard>
+        {/* Åndedræt */}
+        <Expandable title="Åndedræt" subtitle="Sæsonens pranayama" glowColor={season.glowColor}>
+          <p className={styles.sectionText}>{season.breathing}</p>
+        </Expandable>
 
-        <GlassCard glowColor={season.glowColor}>
-          <div className={styles.section}>
-            <p className={styles.sectionLabel}>Meditation</p>
-            <p className={styles.sectionText}>{season.meditation}</p>
-          </div>
-        </GlassCard>
+        {/* Meditation */}
+        <Expandable title="Meditation" subtitle="Sæsonens indre praksis" glowColor={season.glowColor}>
+          <p className={styles.sectionText}>{season.meditation}</p>
+        </Expandable>
 
-        <GlassCard glowColor={season.glowColor}>
-          <div className={styles.section}>
-            <p className={styles.sectionLabel}>Akupressur</p>
-            <p className={styles.sectionText}>{season.acupressure}</p>
+        {/* Akupressur */}
+        <Expandable title="Akupressur" subtitle="Sæsonens punkt" glowColor={season.glowColor}>
+          <p className={styles.sectionText}>{season.acupressure}</p>
+        </Expandable>
+
+        {/* Relateret praksis */}
+        <GlassCard
+          className={styles.practiceLink}
+          glowColor={season.glowColor}
+          onClick={() => navigate('/praksis')}
+        >
+          <div className={styles.practiceLinkContent}>
+            <div>
+              <p className={styles.practiceLinkLabel}>Prøv sæsonens praksis</p>
+              <p className={styles.practiceLinkTitle}>Meditation · Yoga · Journal</p>
+            </div>
+            <span className={styles.practiceLinkArrow}>→</span>
           </div>
         </GlassCard>
       </div>

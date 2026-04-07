@@ -1,34 +1,14 @@
-.back {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--text-secondary);
-  font-size: 0.85rem;
-  margin-bottom: var(--space-md);
-  cursor: pointer;
-  transition: color var(--transition-fast);
-}
-
-.back:hover {
-  color: var(--text-bright);
-}
-
 .header {
   text-align: center;
   margin-bottom: var(--space-lg);
 }
 
-.circle {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  color: white;
-  margin: 0 auto var(--space-md);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+.bigChar {
+  font-size: 4rem;
+  font-weight: 300;
+  text-shadow: 0 0 40px currentColor;
+  margin-bottom: var(--space-sm);
+  line-height: 1;
 }
 
 .name {
@@ -44,17 +24,16 @@
   font-size: 0.85rem;
 }
 
-.section {
-  margin-bottom: var(--space-md);
+.correspondences {
+  display: flex;
+  flex-direction: column;
 }
 
-.sectionLabel {
-  font-size: 0.65rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-secondary);
-  margin-bottom: var(--space-sm);
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
 }
 
 .sectionText {
@@ -91,18 +70,10 @@
   color: var(--text-bright);
 }
 
-.foodList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-xs);
-}
-
-.foodTag {
-  font-size: 0.75rem;
-  padding: 4px 12px;
-  border-radius: var(--radius-full);
-  background: var(--bg-elevated);
-  color: var(--text-primary);
+.organTime {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 4px;
 }
 
 .emotionRow {
@@ -129,4 +100,60 @@
 .emotionText {
   font-size: 0.9rem;
   color: var(--text-primary);
+}
+
+.foodList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.foodTag {
+  font-size: 0.75rem;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+}
+
+.practiceLink {
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.practiceLink:active {
+  transform: scale(0.985);
+}
+
+.practiceLinkContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.practiceLinkLabel {
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.practiceLinkTitle {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 300;
+  color: var(--text-bright);
+}
+
+.practiceLinkArrow {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.practiceLink:hover .practiceLinkArrow {
+  transform: translateX(4px);
+  color: var(--accent);
 }

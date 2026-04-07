@@ -91,3 +91,49 @@ img {
   letter-spacing: 0.1em;
   color: var(--text-secondary);
 }
+
+/* Glow text for large symbols */
+.glow-text {
+  text-shadow: 0 0 40px currentColor;
+}
+
+/* Left-border list */
+.left-border-list {
+  list-style: none;
+  padding: 0;
+}
+
+.left-border-list li {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+  padding: 4px 0 4px var(--space-sm);
+  border-left: 2px solid var(--accent-light);
+  margin-bottom: 4px;
+}
+
+/* Correspondence row */
+.correspondence-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-xs) 0;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.correspondence-row:last-child {
+  border-bottom: none;
+}
+
+.correspondence-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.correspondence-value {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  text-align: right;
+}
