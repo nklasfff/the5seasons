@@ -41,7 +41,7 @@ export default function JourneyArc({ size = 280 }) {
   return (
     <svg viewBox={`0 0 ${w} ${h}`} width={w} height={h} style={{ display: 'block', margin: '0 auto' }}>
       {/* Background arc path */}
-      <path d={pathD} fill="none" stroke="rgba(0,0,0,0.06)" strokeWidth="2" strokeLinecap="round" />
+      <path d={pathD} fill="none" stroke="var(--line-subtle, rgba(255,255,255,0.12))" strokeWidth="2" strokeLinecap="round" />
 
       {/* Animated traveling particle */}
       <circle r="2.5" fill={current.color} opacity="0.4">
@@ -85,7 +85,7 @@ export default function JourneyArc({ size = 280 }) {
       })}
 
       {/* "Din rejse" label */}
-      <text x={w / 2} y={h - 4} textAnchor="middle" fontSize="7" fill="#A09890"
+      <text x={w / 2} y={h - 4} textAnchor="middle" fontSize="7" fill="var(--text-dim, #A09890)"
         fontFamily="Inter, sans-serif" fontWeight="400" letterSpacing="0.08em"
         style={{ textTransform: 'uppercase' }}>
         din sæsonrejse

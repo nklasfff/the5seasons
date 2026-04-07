@@ -54,7 +54,7 @@ export default function ElementCircle({ size = 260 }) {
         const [bx, by] = getPos(cx, cy, r, elements[b].angle);
         return (
           <line key={`ko-${i}`} x1={ax} y1={ay} x2={bx} y2={by}
-            stroke="rgba(0,0,0,0.04)" strokeWidth="0.5" strokeDasharray="3 4" />
+            stroke="var(--line-faint, rgba(255,255,255,0.06))" strokeWidth="0.5" strokeDasharray="3 4" />
         );
       })}
 
@@ -66,7 +66,7 @@ export default function ElementCircle({ size = 260 }) {
         const isActiveEdge = a === activeIdx;
         return (
           <g key={`sheng-${i}`}>
-            <path d={path} fill="none" stroke={isActiveEdge ? elements[a].color : 'rgba(0,0,0,0.06)'}
+            <path d={path} fill="none" stroke={isActiveEdge ? elements[a].color : 'var(--line-subtle, rgba(255,255,255,0.12))'}
               strokeWidth={isActiveEdge ? 1.5 : 0.8} strokeLinecap="round"
               opacity={isActiveEdge ? 0.4 : 1} />
             {/* Traveling energy dot on active Sheng edge */}
@@ -80,10 +80,10 @@ export default function ElementCircle({ size = 260 }) {
       })}
 
       {/* Center — Wu Xing symbol */}
-      <circle cx={cx} cy={cy} r="18" fill="none" stroke="rgba(0,0,0,0.04)" strokeWidth="0.5" />
-      <text x={cx} y={cy - 5} textAnchor="middle" fontSize="11" fill="#9B7B5A"
+      <circle cx={cx} cy={cy} r="18" fill="none" stroke="var(--line-faint, rgba(255,255,255,0.06))" strokeWidth="0.5" />
+      <text x={cx} y={cy - 5} textAnchor="middle" fontSize="11" fill="var(--text-secondary, #9B7B5A)"
         fontFamily="Cormorant Garamond, serif" fontWeight="300">五行</text>
-      <text x={cx} y={cy + 9} textAnchor="middle" fontSize="6.5" fill="#A09890"
+      <text x={cx} y={cy + 9} textAnchor="middle" fontSize="6.5" fill="var(--text-muted, #A09890)"
         fontFamily="Inter, sans-serif" fontWeight="400" letterSpacing="0.06em">Wu Xing</text>
 
       {/* Element nodes */}

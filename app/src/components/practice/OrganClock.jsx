@@ -88,7 +88,7 @@ export default function OrganClockPage() {
                   dominantBaseline="middle"
                   fontSize={isActive ? 8 : 7}
                   fontWeight={isActive ? 500 : 400}
-                  fill={isActive ? o.color : '#8A857E'}
+                  fill={isActive ? o.color : 'var(--text-muted, #8A857E)'}
                   fontFamily="Inter, sans-serif"
                 >
                   {o.name}
@@ -96,12 +96,12 @@ export default function OrganClockPage() {
               </g>
             );
           })}
-          <circle cx="150" cy="150" r="78" fill="none" stroke="rgba(0,0,0,0.06)" strokeWidth="0.5" />
-          <circle cx="150" cy="150" r="132" fill="none" stroke="rgba(0,0,0,0.06)" strokeWidth="0.5" />
-          <text x="150" y="148" textAnchor="middle" fontSize="10" fill="#9B7B5A" fontFamily="Cormorant Garamond, serif" fontWeight="300">
+          <circle cx="150" cy="150" r="78" fill="none" stroke="var(--line-faint, rgba(255,255,255,0.06))" strokeWidth="0.5" />
+          <circle cx="150" cy="150" r="132" fill="none" stroke="var(--line-faint, rgba(255,255,255,0.06))" strokeWidth="0.5" />
+          <text x="150" y="148" textAnchor="middle" fontSize="10" fill="var(--text-secondary, #9B7B5A)" fontFamily="Cormorant Garamond, serif" fontWeight="300">
             organ
           </text>
-          <text x="150" y="162" textAnchor="middle" fontSize="10" fill="#9B7B5A" fontFamily="Cormorant Garamond, serif" fontWeight="300">
+          <text x="150" y="162" textAnchor="middle" fontSize="10" fill="var(--text-secondary, #9B7B5A)" fontFamily="Cormorant Garamond, serif" fontWeight="300">
             uret
           </text>
         </svg>

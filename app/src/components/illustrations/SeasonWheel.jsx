@@ -60,7 +60,7 @@ export default function SeasonWheel({ size = 240 }) {
   return (
     <svg viewBox={`0 0 ${size} ${size}`} width={size} height={size} style={{ display: 'block', margin: '0 auto' }}>
       {/* Outer decorative ring */}
-      <circle cx={cx} cy={cy} r={outerR + 14} fill="none" stroke="rgba(0,0,0,0.03)" strokeWidth="0.5" />
+      <circle cx={cx} cy={cy} r={outerR + 14} fill="none" stroke="var(--line-faint, rgba(255,255,255,0.06))" strokeWidth="0.5" />
 
       {/* Season ring segments */}
       {segments.map((seg) => {
@@ -88,7 +88,7 @@ export default function SeasonWheel({ size = 240 }) {
             {/* Season name in the ring */}
             <text x={nameX} y={nameY - 2} textAnchor="middle" dominantBaseline="central"
               fontSize={isActive ? 9 : 7.5} fontWeight={isActive ? 500 : 400}
-              fill={isActive ? seg.color : '#8A857E'} fontFamily="Inter, sans-serif">
+              fill={isActive ? seg.color : 'var(--text-muted, #8A857E)'} fontFamily="Inter, sans-serif">
               {seg.name}
             </text>
 
@@ -112,8 +112,8 @@ export default function SeasonWheel({ size = 240 }) {
       })}
 
       {/* Inner circle border */}
-      <circle cx={cx} cy={cy} r={innerR} fill="none" stroke="rgba(0,0,0,0.04)" strokeWidth="0.5" />
-      <circle cx={cx} cy={cy} r={outerR} fill="none" stroke="rgba(0,0,0,0.04)" strokeWidth="0.5" />
+      <circle cx={cx} cy={cy} r={innerR} fill="none" stroke="var(--line-faint, rgba(255,255,255,0.06))" strokeWidth="0.5" />
+      <circle cx={cx} cy={cy} r={outerR} fill="none" stroke="var(--line-faint, rgba(255,255,255,0.06))" strokeWidth="0.5" />
 
       {/* Month labels */}
       {monthNames.map((name, i) => {
@@ -121,7 +121,7 @@ export default function SeasonWheel({ size = 240 }) {
         const [mx, my] = polarToXY(cx, cy, outerR + 12, angle);
         return (
           <text key={i} x={mx} y={my} textAnchor="middle" dominantBaseline="central"
-            fontSize="5.5" fill="#A09890" fontFamily="Inter, sans-serif">
+            fontSize="5.5" fill="var(--text-dim, #A09890)" fontFamily="Inter, sans-serif">
             {name}
           </text>
         );
@@ -137,9 +137,9 @@ export default function SeasonWheel({ size = 240 }) {
       </circle>
 
       {/* Center text */}
-      <text x={cx} y={cy - 3} textAnchor="middle" fontSize="9" fill="#9B7B5A"
+      <text x={cx} y={cy - 3} textAnchor="middle" fontSize="9" fill="var(--text-secondary, #9B7B5A)"
         fontFamily="Cormorant Garamond, serif" fontWeight="300">årets</text>
-      <text x={cx} y={cy + 9} textAnchor="middle" fontSize="9" fill="#9B7B5A"
+      <text x={cx} y={cy + 9} textAnchor="middle" fontSize="9" fill="var(--text-secondary, #9B7B5A)"
         fontFamily="Cormorant Garamond, serif" fontWeight="300">cyklus</text>
     </svg>
   );
