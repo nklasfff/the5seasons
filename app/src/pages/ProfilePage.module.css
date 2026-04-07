@@ -301,6 +301,37 @@
   letter-spacing: 0.04em;
 }
 
+/* Symptoms */
+.symptomItem {
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.symptomItem:last-child {
+  border-bottom: none;
+}
+
+.symptomName {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-bright);
+  margin-bottom: 3px;
+}
+
+.symptomExpl {
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin-bottom: 3px;
+}
+
+.symptomRemedy {
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
 /* About */
 .aboutText {
   font-size: 0.88rem;

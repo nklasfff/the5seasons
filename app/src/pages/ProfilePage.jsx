@@ -200,6 +200,19 @@ export default function ProfilePage() {
           </GlassCard>
         )}
 
+        {/* Symptoms awareness */}
+        {deep?.symptoms && (
+          <Expandable title="Kender du disse tegn?" subtitle={`${current.name} · ubalance`} glowColor={`${current.color}10`}>
+            {deep.symptoms.map((s, i) => (
+              <div key={i} className={styles.symptomItem}>
+                <p className={styles.symptomName}>{s.symptom}</p>
+                <p className={styles.symptomExpl}>{s.explanation}</p>
+                <p className={styles.symptomRemedy}>→ {s.remedy}</p>
+              </div>
+            ))}
+          </Expandable>
+        )}
+
         {/* Current season detail */}
         <GlassCard glowColor={`${current.color}15`}>
           <div className={styles.cardHeader}>

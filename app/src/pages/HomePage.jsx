@@ -38,9 +38,25 @@ export default function HomePage() {
 
   const today = useMemo(() => {
     const now = new Date();
+    const hour = now.getHours();
+    const dayIndex = now.getDate();
     const organ = getCurrentOrgan();
-    const dayWisdom = deep?.journalPrompts?.[now.getDate() % (deep.journalPrompts?.length || 1)] || '';
-    return { now, organ, dayWisdom, formatted: formatDate(now) };
+    const dayWisdom = deep?.journalPrompts?.[dayIndex % (deep.journalPrompts?.length || 1)] || '';
+
+    // Today's practice — pick based on time of day
+    let practice = { title: 'Pusterum', subtitle: '3 min', body: 'Tag tre dybe vejrtrækninger.' };
+    if (hour >= 5 && hour < 10 && deep?.yogaSequence?.length) {
+      const pose = deep.yogaSequence[dayIndex % deep.yogaSequence.length];
+      practice = { title: pose.name, subtitle: `${pose.sanskrit} · ${pose.duration}`, body: pose.instruction };
+    } else if (hour >= 10 && hour < 14 && deep?.breathingExercises?.length) {
+      const ex = deep.breathingExercises[dayIndex % deep.breathingExercises.length];
+      practice = { title: ex.title, subtitle: `${ex.rhythm}`, body: ex.instruction };
+    } else if (hour >= 14 && hour < 21 && deep?.meditations?.length) {
+      const med = deep.meditations[dayIndex % deep.meditations.length];
+      practice = { title: med.title, subtitle: med.duration, body: med.intention };
+    }
+
+    return { now, organ, dayWisdom, practice, formatted: formatDate(now) };
   }, [deep]);
 
   return (
@@ -104,6 +120,18 @@ export default function HomePage() {
             </div>
           </div>
           <p className={styles.cardBody}>{today.organ.guidance}</p>
+        </GlassCard>
+
+        {/* Today's practice — concrete, actionable */}
+        <GlassCard glowColor={`${current.color}15`} onClick={() => navigate('/praksis')} className={styles.tappable}>
+          <div className={styles.cardHeader}>
+            <span className={styles.cardLabel}>Dagens praksis</span>
+            <span className={styles.cardAccent} style={{ color: current.color }}>{current.element}</span>
+          </div>
+          <h3 className={styles.cardTitle}>{today.practice.title}</h3>
+          <p className={styles.cardQuote}>{today.practice.subtitle}</p>
+          <p className={styles.cardBody}>{today.practice.body}</p>
+          <span className={styles.tapHint}>Start din praksis →</span>
         </GlassCard>
 
         {/* Daily wisdom — temporal, specific */}
