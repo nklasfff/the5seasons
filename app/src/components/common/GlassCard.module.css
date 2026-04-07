@@ -3,6 +3,7 @@
   border: 1px solid var(--glass-border);
   border-radius: var(--radius);
   padding: var(--space-lg);
+  box-shadow: var(--shadow);
   transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
   position: relative;
 }

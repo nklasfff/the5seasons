@@ -96,9 +96,9 @@
   --border: rgba(0, 0, 0, 0.1);
   --border-light: rgba(0, 0, 0, 0.15);
 
-  --glass: rgba(255, 255, 255, 0.75);
-  --glass-border: rgba(0, 0, 0, 0.06);
-  --glass-hover: rgba(255, 255, 255, 0.92);
+  --glass: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-hover: rgba(255, 255, 255, 0.95);
   --glass-strong: rgba(0, 0, 0, 0.04);
 
   --glow-blue: rgba(58, 111, 160, 0.07);

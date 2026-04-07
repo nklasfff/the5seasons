@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useSeason } from '../../context/SeasonContext';
 import GlassCard from '../common/GlassCard';
+import PracticeMandala from '../illustrations/PracticeMandala';
 import { JournalIcon, MeditationIcon, OrganClockIcon } from '../illustrations/PracticeIcons';
 import styles from './PracticeHub.module.css';
 
@@ -15,10 +16,14 @@ export default function PracticeHub() {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div style={{ maxWidth: 600, margin: '0 auto', padding: 'var(--space-xl) var(--space-lg) var(--space-lg)' }}>
       <div className={`${styles.header} animate-fade-up`}>
         <h1 className={styles.title}>Praksis</h1>
         <p className={styles.subtitle}>{current.name} · {current.element}</p>
+      </div>
+
+      <div className="animate-fade-in" style={{ marginBottom: 'var(--space-xl)' }}>
+        <PracticeMandala size={180} />
       </div>
 
       <div className={styles.grid}>
@@ -26,7 +31,7 @@ export default function PracticeHub() {
           <GlassCard
             key={p.id}
             className={`${styles.practiceCard} animate-fade-up-delay-${i + 1}`}
-            glowColor={current.glowColor}
+            glowColor={`${current.color}15`}
             onClick={() => navigate(`/praksis/${p.id}`)}
           >
             <div className={styles.cardInner}>
