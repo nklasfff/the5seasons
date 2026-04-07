@@ -1,5 +1,6 @@
 import { useSeason } from '../../context/SeasonContext';
 import GlassCard from '../common/GlassCard';
+import WisdomLeaf from '../illustrations/WisdomLeaf';
 import styles from './DailyWisdom.module.css';
 
 const wisdomBySeason = {
@@ -45,7 +46,10 @@ export default function DailyWisdom() {
 
   return (
     <GlassCard className="animate-fade-up-delay-2">
-      <p className={styles.label}>Dagens visdom</p>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-xs)', marginBottom: 'var(--space-xs)' }}>
+        <WisdomLeaf size={28} />
+        <p className={styles.label}>Dagens visdom</p>
+      </div>
       <p className={styles.quote}>{wisdom}</p>
       {activeOrgan && (
         <p className={styles.detail}>

@@ -73,15 +73,38 @@ export default function Meditation() {
       </div>
 
       <GlassCard className="animate-fade-up-delay-2" glowColor={current.glowColor}>
-        <div
-          className={`${styles.breatheCircle} ${styles[phase]}`}
-          style={{
-            background: `radial-gradient(circle, ${current.lightColor}40 0%, ${current.glowColor} 100%)`,
-            border: `1px solid ${current.lightColor}60`,
-            boxShadow: running ? `0 0 40px ${current.glowColor}` : 'none',
-          }}
-        >
-          {running ? (phase === 'inhale' ? 'Indånd' : 'Udånd') : seconds === 0 ? 'Færdig' : 'Klar'}
+        {/* Breathing visualization with outer rings */}
+        <div className={styles.breatheWrap}>
+          <svg className={styles.breatheRings} viewBox="0 0 220 220" width="220" height="220">
+            {/* Outer guide ring */}
+            <circle cx="110" cy="110" r="105" fill="none" stroke={current.color}
+              strokeWidth="0.5" strokeDasharray="4 6" opacity={running ? 0.15 : 0.06}>
+              <animateTransform attributeName="transform" type="rotate"
+                values="0 110 110;360 110 110" dur="30s" repeatCount="indefinite" />
+            </circle>
+            {/* Middle breathing ring */}
+            <circle cx="110" cy="110" r="95" fill="none" stroke={current.color}
+              strokeWidth="0.8" opacity={running ? 0.12 : 0.04}>
+              <animate attributeName="r" values={running ? (phase === 'inhale' ? '85;100' : '100;85') : '92;92'}
+                dur="4s" fill="freeze" />
+            </circle>
+            {/* Inner glow */}
+            <circle cx="110" cy="110" r="80" fill={current.color}
+              opacity={running ? 0.04 : 0.02}>
+              <animate attributeName="r" values={running ? (phase === 'inhale' ? '70;85' : '85;70') : '78;78'}
+                dur="4s" fill="freeze" />
+            </circle>
+          </svg>
+          <div
+            className={`${styles.breatheCircle} ${styles[phase]}`}
+            style={{
+              background: `radial-gradient(circle, ${current.lightColor}40 0%, ${current.glowColor} 100%)`,
+              border: `1px solid ${current.lightColor}60`,
+              boxShadow: running ? `0 0 50px ${current.glowColor}, 0 0 100px ${current.glowColor}40` : 'none',
+            }}
+          >
+            {running ? (phase === 'inhale' ? 'Indånd' : 'Udånd') : seconds === 0 ? 'Færdig' : 'Klar'}
+          </div>
         </div>
 
         <p className={styles.timerDisplay}>

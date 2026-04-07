@@ -55,11 +55,26 @@
   background: var(--accent-glow);
 }
 
+.breatheWrap {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: var(--space-md) auto;
+}
+
+.breatheRings {
+  position: absolute;
+  inset: 0;
+}
+
 .breatheCircle {
-  width: 180px;
-  height: 180px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
-  margin: var(--space-lg) auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -67,16 +82,18 @@
   font-size: 1.2rem;
   font-weight: 300;
   color: var(--accent);
-  transition: transform 4s ease-in-out, opacity 4s ease-in-out, box-shadow 0.5s ease;
+  transition: width 4s ease-in-out, height 4s ease-in-out, opacity 4s ease-in-out, box-shadow 0.5s ease;
 }
 
 .breatheCircle.inhale {
-  transform: scale(1.2);
+  width: 170px;
+  height: 170px;
   opacity: 1;
 }
 
 .breatheCircle.exhale {
-  transform: scale(0.85);
+  width: 110px;
+  height: 110px;
   opacity: 0.6;
 }
 

@@ -1,5 +1,6 @@
 import { useSeason } from '../../context/SeasonContext';
 import GlassCard from '../common/GlassCard';
+import SeasonSymbol from '../illustrations/SeasonSymbol';
 import styles from './CurrentSeason.module.css';
 
 export default function CurrentSeason() {
@@ -7,13 +8,20 @@ export default function CurrentSeason() {
 
   return (
     <GlassCard className="animate-fade-up-delay-1" glowColor={current.glowColor}>
-      <span className={styles.badge}>Aktuel sæson</span>
-      <h2 className={styles.name}>
-        {current.name} <span className={styles.element}>· {current.element}</span>
-      </h2>
-      <p className={styles.meta}>
-        {current.monthLabel} · {current.direction} · {current.chineseChar}
-      </p>
+      <div className={styles.top}>
+        <div className={styles.textSide}>
+          <span className={styles.badge}>Aktuel sæson</span>
+          <h2 className={styles.name}>
+            {current.name} <span className={styles.element}>· {current.element}</span>
+          </h2>
+          <p className={styles.meta}>
+            {current.monthLabel} · {current.direction}
+          </p>
+        </div>
+        <div className={styles.symbolSide}>
+          <SeasonSymbol seasonId={current.id} color={current.color} size={80} />
+        </div>
+      </div>
       <p className={styles.description}>{current.description}</p>
       <div className={styles.themes}>
         {current.themes.map(t => (

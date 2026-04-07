@@ -1,3 +1,18 @@
+.top {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.textSide {
+  flex: 1;
+}
+
+.symbolSide {
+  flex-shrink: 0;
+}
+
 .badge {
   display: inline-block;
   font-size: 0.65rem;
@@ -10,7 +25,7 @@
 
 .name {
   font-family: var(--font-display);
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 300;
   color: var(--text-bright);
   margin-bottom: 4px;
@@ -24,7 +39,6 @@
 .meta {
   color: var(--text-secondary);
   font-size: 0.85rem;
-  margin-bottom: var(--space-md);
 }
 
 .description {

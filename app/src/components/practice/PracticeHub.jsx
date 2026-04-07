@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useSeason } from '../../context/SeasonContext';
 import GlassCard from '../common/GlassCard';
 import Expandable from '../common/Expandable';
+import PracticeMandala from '../illustrations/PracticeMandala';
+import { JournalIcon, MeditationIcon, OrganClockIcon } from '../illustrations/PracticeIcons';
 import styles from './PracticeHub.module.css';
 
 const organs = [
@@ -32,9 +34,9 @@ function getOrganNow() {
 }
 
 const practices = [
-  { id: 'journal', icon: '✎', title: 'Journal', desc: 'Sæsonbaseret refleksion og skrivning' },
-  { id: 'meditation', icon: '◉', title: 'Meditation', desc: 'Pusterumsmeditationer · 3-10 min' },
-  { id: 'organur', icon: '◷', title: 'Organ-ur', desc: 'Se hvilke organer der er aktive nu' },
+  { id: 'journal', Icon: JournalIcon, title: 'Journal', desc: 'Sæsonbaseret refleksion og skrivning' },
+  { id: 'meditation', Icon: MeditationIcon, title: 'Meditation', desc: 'Pusterumsmeditationer · 3-10 min' },
+  { id: 'organur', Icon: OrganClockIcon, title: 'Organ-ur', desc: 'Se hvilke organer der er aktive nu' },
 ];
 
 export default function PracticeHub() {
@@ -56,6 +58,9 @@ export default function PracticeHub() {
 
   return (
     <div>
+      <div className="animate-scale-in" style={{ marginBottom: 'var(--space-sm)' }}>
+        <PracticeMandala size={180} />
+      </div>
       <div className={`${styles.header} animate-fade-up`}>
         <h1 className={styles.title}>Praksis</h1>
         <p className={styles.subtitle}>{current.name} · {current.element}</p>
@@ -95,7 +100,7 @@ export default function PracticeHub() {
             onClick={() => navigate(`/praksis/${p.id}`)}
           >
             <div className={styles.cardContent}>
-              <div className={styles.icon}>{p.icon}</div>
+              <div className={styles.icon}><p.Icon size={22} /></div>
               <div className={styles.cardText}>
                 <h3 className={styles.cardTitle}>{p.title}</h3>
                 <p className={styles.cardDesc}>{p.desc}</p>

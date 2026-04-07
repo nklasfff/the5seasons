@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSeason } from '../../context/SeasonContext';
 import GlassCard from '../common/GlassCard';
+import JournalInk from '../illustrations/JournalInk';
 import styles from './Journal.module.css';
 
 const promptsBySeason = {
@@ -73,6 +74,9 @@ export default function Journal() {
   return (
     <div>
       <button className={styles.back} onClick={() => navigate('/praksis')}>‹ Praksis</button>
+      <div className="animate-scale-in" style={{ marginBottom: 'var(--space-sm)' }}>
+        <JournalInk size={120} />
+      </div>
       <h1 className={`${styles.title} animate-fade-up`}>Journal</h1>
 
       <GlassCard className="animate-fade-up-delay-1" glowColor={current.glowColor}>
