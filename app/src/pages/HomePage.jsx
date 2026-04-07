@@ -6,6 +6,7 @@ import deepData from '../data/seasonsDeep.json';
 import heroImg from '../assets/hero.jpeg';
 import SeasonSymbol from '../components/illustrations/SeasonSymbol';
 import GlassCard from '../components/common/GlassCard';
+import LotusDivider from '../components/common/LotusDivider';
 import styles from './HomePage.module.css';
 
 const ORGAN_CLOCK = [
@@ -25,7 +26,7 @@ const ORGAN_CLOCK = [
 
 function getCurrentOrgan() {
   const h = new Date().getHours();
-  return ORGAN_CLOCK.find((o, i) => {
+  return ORGAN_CLOCK.find(o => {
     if (o.start > o.end) return h >= o.start || h < o.end;
     return h >= o.start && h < o.end;
   }) || ORGAN_CLOCK[0];
@@ -41,27 +42,42 @@ export default function HomePage() {
     const hour = now.getHours();
     const dayIndex = now.getDate();
     const organ = getCurrentOrgan();
+
+    // Journal prompt for today
     const dayWisdom = deep?.journalPrompts?.[dayIndex % (deep.journalPrompts?.length || 1)] || '';
 
-    // Today's practice — pick based on time of day
+    // Time-based practice
     let practice = { title: 'Pusterum', subtitle: '3 min', body: 'Tag tre dybe vejrtrækninger.' };
     if (hour >= 5 && hour < 10 && deep?.yogaSequence?.length) {
       const pose = deep.yogaSequence[dayIndex % deep.yogaSequence.length];
       practice = { title: pose.name, subtitle: `${pose.sanskrit} · ${pose.duration}`, body: pose.instruction };
     } else if (hour >= 10 && hour < 14 && deep?.breathingExercises?.length) {
       const ex = deep.breathingExercises[dayIndex % deep.breathingExercises.length];
-      practice = { title: ex.title, subtitle: `${ex.rhythm}`, body: ex.instruction };
+      practice = { title: ex.title, subtitle: ex.rhythm, body: ex.instruction };
     } else if (hour >= 14 && hour < 21 && deep?.meditations?.length) {
       const med = deep.meditations[dayIndex % deep.meditations.length];
       practice = { title: med.title, subtitle: med.duration, body: med.intention };
     }
 
-    return { now, organ, dayWisdom, practice, formatted: formatDate(now) };
-  }, [deep]);
+    // Practice of the Moment — movement + nourishment + intention (like 9Lives)
+    const yoga = deep?.yogaSequence?.[dayIndex % (deep.yogaSequence?.length || 1)];
+    const food = deep?.foodGuide?.[dayIndex % (deep.foodGuide?.length || 1)];
+    const moment = {
+      movement: yoga ? `${yoga.name} — ${yoga.benefit}` : null,
+      nourishment: food ? `${food.name} — ${food.why.split('.')[0]}.` : null,
+      intention: deep?.meditations?.[dayIndex % (deep.meditations?.length || 1)]?.intention || null,
+    };
+
+    // Today's theme (rotate through season themes daily)
+    const themeIndex = dayIndex % (current.themes?.length || 1);
+    const todayTheme = current.themes?.[themeIndex];
+
+    return { now, organ, dayWisdom, practice, moment, todayTheme, formatted: formatDate(now) };
+  }, [deep, current]);
 
   return (
     <div className={styles.page}>
-      {/* Header — personal greeting */}
+      {/* Header */}
       <header className={styles.header}>
         <p className={styles.greeting}>{getGreeting()}</p>
         <h1 className={styles.seasonName} style={{ color: current.color }}>
@@ -70,18 +86,18 @@ export default function HomePage() {
         <p className={styles.date}>{today.formatted}</p>
       </header>
 
-      {/* Hero — the soul of the app */}
+      {/* Hero */}
       <section className={styles.heroSection}>
         <img src={heroImg} alt="De fem sæsoner" className={styles.heroImage} />
       </section>
 
-      {/* Season symbol — alive, breathing */}
+      {/* Season symbol */}
       <section className={styles.symbolSection}>
         <SeasonSymbol seasonId={current.id} color={current.color} size={120} />
       </section>
 
-      {/* Current season — who you are right now */}
       <section className={styles.cards}>
+        {/* Current season */}
         <GlassCard
           glowColor={`${current.color}20`}
           onClick={() => navigate(`/saesoner/${current.id}`)}
@@ -96,20 +112,15 @@ export default function HomePage() {
           <h3 className={styles.cardTitle}>{current.name}</h3>
           <p className={styles.cardQuote}>{current.monthLabel}</p>
           <p className={styles.cardBody}>{current.description}</p>
-          <div className={styles.themes}>
-            {current.themes.map(t => (
-              <span key={t} className={styles.theme} style={{ color: current.color, borderColor: `${current.color}30` }}>{t}</span>
-            ))}
-          </div>
           <span className={styles.tapHint}>Udforsk denne sæson →</span>
         </GlassCard>
 
         {/* Organ clock — what's happening RIGHT NOW */}
-        <GlassCard glowColor={`${today.organ.color}15`}>
+        <GlassCard glowColor={`${today.organ.color}15`} onClick={() => navigate('/praksis/organur')} className={styles.tappable}>
           <div className={styles.cardHeader}>
             <span className={styles.cardLabel}>Lige nu</span>
             <span className={styles.cardAccent} style={{ color: today.organ.color }}>
-              {today.organ.organ}
+              {today.organ.element}
             </span>
           </div>
           <div className={styles.organRow}>
@@ -120,29 +131,71 @@ export default function HomePage() {
             </div>
           </div>
           <p className={styles.cardBody}>{today.organ.guidance}</p>
+          <span className={styles.tapHint}>Se organ-uret →</span>
         </GlassCard>
 
-        {/* Today's practice — concrete, actionable */}
-        <GlassCard glowColor={`${current.color}15`} onClick={() => navigate('/praksis')} className={styles.tappable}>
+        {/* Practice of the Moment — movement, nourishment, intention */}
+        <GlassCard glowColor={`${current.color}15`}>
           <div className={styles.cardHeader}>
-            <span className={styles.cardLabel}>Dagens praksis</span>
-            <span className={styles.cardAccent} style={{ color: current.color }}>{current.element}</span>
+            <span className={styles.cardLabel}>Praksis af øjeblikket</span>
+            <span className={styles.cardAccent} style={{ color: current.color }}>
+              {today.organ.organ}
+            </span>
           </div>
-          <h3 className={styles.cardTitle}>{today.practice.title}</h3>
-          <p className={styles.cardQuote}>{today.practice.subtitle}</p>
-          <p className={styles.cardBody}>{today.practice.body}</p>
-          <span className={styles.tapHint}>Start din praksis →</span>
+
+          {today.moment.movement && (
+            <div className={styles.momentRow}>
+              <span className={styles.momentIcon}>移</span>
+              <div>
+                <p className={styles.momentLabel}>Bevægelse</p>
+                <p className={styles.momentText}>{today.moment.movement}</p>
+              </div>
+            </div>
+          )}
+
+          {today.moment.nourishment && (
+            <div className={styles.momentRow}>
+              <span className={styles.momentIcon}>食</span>
+              <div>
+                <p className={styles.momentLabel}>Næring</p>
+                <p className={styles.momentText}>{today.moment.nourishment}</p>
+              </div>
+            </div>
+          )}
+
+          {today.moment.intention && (
+            <div className={styles.momentRow}>
+              <span className={styles.momentIcon}>意</span>
+              <div>
+                <p className={styles.momentLabel}>Intention</p>
+                <p className={styles.momentText}>{today.moment.intention}</p>
+              </div>
+            </div>
+          )}
         </GlassCard>
 
-        {/* Daily wisdom — temporal, specific */}
-        <GlassCard>
+        <LotusDivider size={30} />
+
+        {/* Today's theme — the season's calling for today */}
+        {today.todayTheme && (
+          <GlassCard glowColor={`${current.color}10`}>
+            <div className={styles.cardHeader}>
+              <span className={styles.cardLabel}>Dagens tema</span>
+            </div>
+            <h3 className={styles.themeTitle} style={{ color: current.color }}>{today.todayTheme}</h3>
+            <p className={styles.themeBody}>
+              {deep?.philosophy?.[today.now.getDate() % (deep.philosophy?.length || 1)]?.split('.').slice(0, 2).join('.') + '.'}
+            </p>
+          </GlassCard>
+        )}
+
+        {/* Daily reflection */}
+        <GlassCard onClick={() => navigate('/praksis/journal')} className={styles.tappable}>
           <div className={styles.cardHeader}>
             <span className={styles.cardLabel}>Dagens refleksion</span>
           </div>
           <p className={styles.wisdomQuote}>{today.dayWisdom}</p>
-          <span className={styles.tapHint} onClick={() => navigate('/praksis/journal')} style={{ cursor: 'pointer' }}>
-            Skriv i din journal →
-          </span>
+          <span className={styles.tapHint}>Skriv i din journal →</span>
         </GlassCard>
       </section>
     </div>

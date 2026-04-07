@@ -146,6 +146,33 @@ export default function ProfilePage() {
           </div>
         </GlassCard>
 
+        {/* Korrespondence-oversigt — like 9Lives Profile Overview */}
+        <GlassCard className="animate-fade-up-delay-2">
+          <div className={styles.cardHeader}>
+            <span className={styles.cardLabel}>Din sæson · Oversigt</span>
+            <span className={styles.cardAccent} style={{ color: current.color }}>{current.chineseChar}</span>
+          </div>
+          <div className={styles.overviewGrid}>
+            {[
+              ['Element', current.element],
+              ['Retning', current.direction],
+              ['Yin-organ', current.organs.yin],
+              ['Yang-organ', current.organs.yang],
+              ['I balance', current.emotion.balanced],
+              ['Ubalance', current.emotion.imbalanced],
+              ['Smag', current.flavor],
+              ['Klima', current.climate],
+              ['Væv', current.tissue],
+              ['Periode', current.monthLabel],
+            ].map(([label, value]) => (
+              <div key={label} className={styles.overviewRow}>
+                <span className={styles.overviewLabel}>{label}</span>
+                <span className={styles.overviewValue}>{value}</span>
+              </div>
+            ))}
+          </div>
+        </GlassCard>
+
         {/* Milestone insight */}
         {milestone && (
           <GlassCard glowColor={`${current.color}15`} className="animate-fade-up-delay-3">

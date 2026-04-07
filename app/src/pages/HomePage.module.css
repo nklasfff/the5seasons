@@ -173,6 +173,58 @@
   color: var(--text-muted);
 }
 
+/* Practice of the Moment */
+.momentRow {
+  display: flex;
+  gap: var(--space-md);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--glass-border);
+  align-items: flex-start;
+}
+
+.momentRow:last-child {
+  border-bottom: none;
+}
+
+.momentIcon {
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  width: 24px;
+  text-align: center;
+  font-family: serif;
+}
+
+.momentLabel {
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.momentText {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* Today's theme */
+.themeTitle {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 300;
+  margin-bottom: var(--space-sm);
+}
+
+.themeBody {
+  font-size: 0.88rem;
+  color: var(--text-primary);
+  line-height: 1.8;
+}
+
 /* Wisdom */
 .wisdomQuote {
   font-family: var(--font-display);

@@ -301,6 +301,37 @@
   letter-spacing: 0.04em;
 }
 
+/* Overview chart */
+.overviewGrid {
+  display: flex;
+  flex-direction: column;
+}
+
+.overviewRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-xs) 0;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.overviewRow:last-child {
+  border-bottom: none;
+}
+
+.overviewLabel {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.overviewValue {
+  font-size: 0.88rem;
+  color: var(--text-bright);
+  text-align: right;
+}
+
 /* Symptoms */
 .symptomItem {
   padding: var(--space-sm) 0;
