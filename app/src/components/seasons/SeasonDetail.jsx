@@ -48,7 +48,7 @@ export default function SeasonDetail() {
       {/* Tab: Forstå */}
       {activeTab === 'forst' && (
         <div className={styles.sections}>
-          <Expandable title="Filosofi" subtitle={`${season.element}-elementet`} defaultOpen glowColor={season.glowColor}>
+          <Expandable title="Filosofi" subtitle={`${season.element}-elementet`} glowColor={season.glowColor}>
             {deep?.philosophy?.map((p, i) => (
               <p key={i} className={styles.sectionText} style={{ marginBottom: i < deep.philosophy.length - 1 ? 'var(--space-md)' : 0 }}>{p}</p>
             ))}
@@ -99,7 +99,7 @@ export default function SeasonDetail() {
       {activeTab === 'praktiser' && (
         <div className={styles.sections}>
           {deep?.yogaSequence && (
-            <Expandable title="Yoga-sekvens" subtitle={`${deep.yogaSequence.length} stillinger`} defaultOpen glowColor={season.glowColor}>
+            <Expandable title="Yoga-sekvens" subtitle={`${deep.yogaSequence.length} stillinger`} glowColor={season.glowColor}>
               {deep.yogaSequence.map((pose, i) => (
                 <div key={i} className={styles.poseItem}>
                   <div className={styles.poseHeader}>
@@ -167,7 +167,7 @@ export default function SeasonDetail() {
       {activeTab === 'anvend' && (
         <div className={styles.sections}>
           {deep?.foodGuide && (
-            <Expandable title="Madguide" subtitle={`${deep.foodGuide.length} fødevarer`} defaultOpen glowColor={season.glowColor}>
+            <Expandable title="Madguide" subtitle={`${deep.foodGuide.length} fødevarer`} glowColor={season.glowColor}>
               {deep.foodGuide.map((food, i) => (
                 <div key={i} className={styles.foodItem}>
                   <p className={styles.foodName}>{food.name}</p>
