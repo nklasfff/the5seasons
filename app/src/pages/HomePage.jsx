@@ -1,78 +1,120 @@
+import { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSeason } from '../context/SeasonContext';
-import { getGreeting } from '../utils/dateUtils';
-import SeasonWheel from '../components/illustrations/SeasonWheel';
+import { getGreeting, formatDate } from '../utils/dateUtils';
+import deepData from '../data/seasonsDeep.json';
+import heroImg from '../assets/hero.jpeg';
+import SeasonSymbol from '../components/illustrations/SeasonSymbol';
 import GlassCard from '../components/common/GlassCard';
 import styles from './HomePage.module.css';
 
-const wisdomBySeason = {
-  foraar: [
-    'Lad vrede være en vejviser — den viser dig hvor dine grænser er.',
-    'Foråret minder dig om at fornyelse kræver mod til at begynde forfra.',
-    'Som et træ der vokser mod lyset — find din retning og stræk dig.',
-  ],
-  sommer: [
-    'Dit hjerte kender forskellen mellem frygt og kærlighed. Vælg kærlighed.',
-    'Sommeren inviterer dig til at leve fuldt ud — ikke perfekt, men ægte.',
-    'Passion uden rod bliver rastløshed. Find din ild og giv den retning.',
-  ],
-  sensommer: [
-    'Du behøver ikke gøre mere. Du behøver at modtage det der allerede er.',
-    'Fordøjelse handler ikke kun om mad — det handler om at integrere livet.',
-    'Mærk jorden under dine fødder. Du er allerede hjemme.',
-  ],
-  efteraar: [
-    'At slippe er ikke at tabe. Det er at gøre plads til det nye.',
-    'Sorg er kærlighedens ekko. Giv den plads.',
-    'Efteråret viser os at skønhed også findes i det der falder.',
-  ],
-  vinter: [
-    'Hvile er ikke dovenskab. Det er visdom i dens reneste form.',
-    'Vinteren inviterer dig indad — til stilhed, dybde og essens.',
-    'Stol på at frøet gror i mørket. Du behøver ikke forstå alt nu.',
-  ],
-};
+const ORGAN_CLOCK = [
+  { start: 23, end: 1, organ: 'Galdeblære', element: 'Træ', color: '#5B8C5A', guidance: 'Tid for dyb søvn. Galdeblæren renser og regenererer.' },
+  { start: 1, end: 3, organ: 'Lever', element: 'Træ', color: '#5B8C5A', guidance: 'Leverens time. Optimal udrensning kræver hvile.' },
+  { start: 3, end: 5, organ: 'Lunger', element: 'Metal', color: '#A8A8A0', guidance: 'Lungernes tid. Dyb søvn styrker immunforsvaret.' },
+  { start: 5, end: 7, organ: 'Tyktarm', element: 'Metal', color: '#A8A8A0', guidance: 'Tid til at vågne. Drik varmt vand og lad kroppen rense.' },
+  { start: 7, end: 9, organ: 'Mave', element: 'Jord', color: '#C9A84C', guidance: 'Mavens time. Spis en varm, nærende morgenmad.' },
+  { start: 9, end: 11, organ: 'Milt', element: 'Jord', color: '#C9A84C', guidance: 'Miltens tid. Optimal for mentalt arbejde og fokus.' },
+  { start: 11, end: 13, organ: 'Hjerte', element: 'Ild', color: '#C75A3A', guidance: 'Hjertets time. Tid for forbindelse og let frokost.' },
+  { start: 13, end: 15, organ: 'Tyndtarm', element: 'Ild', color: '#C75A3A', guidance: 'Sortér og integrer. Lad kroppen fordøje i ro.' },
+  { start: 15, end: 17, organ: 'Blære', element: 'Vand', color: '#3A6FA0', guidance: 'Blærens tid. Drik rigeligt vand, let motion.' },
+  { start: 17, end: 19, organ: 'Nyrer', element: 'Vand', color: '#3A6FA0', guidance: 'Nyrernes time. Tid til at sænke tempoet.' },
+  { start: 19, end: 21, organ: 'Perikardium', element: 'Ild', color: '#C75A3A', guidance: 'Tid for nærvær. Vær sammen med dem du holder af.' },
+  { start: 21, end: 23, organ: 'Tre Varmere', element: 'Ild', color: '#C75A3A', guidance: 'Tid for ro. Lad kroppen forberede sig på søvn.' },
+];
+
+function getCurrentOrgan() {
+  const h = new Date().getHours();
+  return ORGAN_CLOCK.find((o, i) => {
+    if (o.start > o.end) return h >= o.start || h < o.end;
+    return h >= o.start && h < o.end;
+  }) || ORGAN_CLOCK[0];
+}
 
 export default function HomePage() {
+  const navigate = useNavigate();
   const { current } = useSeason();
-  const dayIndex = new Date().getDate() % wisdomBySeason[current.id].length;
-  const wisdom = wisdomBySeason[current.id][dayIndex];
+  const deep = deepData[current.id];
+
+  const today = useMemo(() => {
+    const now = new Date();
+    const organ = getCurrentOrgan();
+    const dayWisdom = deep?.journalPrompts?.[now.getDate() % (deep.journalPrompts?.length || 1)] || '';
+    return { now, organ, dayWisdom, formatted: formatDate(now) };
+  }, [deep]);
 
   return (
     <div className={styles.page}>
+      {/* Header — personal greeting */}
       <header className={styles.header}>
         <p className={styles.greeting}>{getGreeting()}</p>
         <h1 className={styles.seasonName} style={{ color: current.color }}>
           {current.chineseChar} {current.name}
         </h1>
+        <p className={styles.date}>{today.formatted}</p>
       </header>
 
+      {/* Hero — the soul of the app */}
       <section className={styles.heroSection}>
-        <SeasonWheel size={220} />
+        <img src={heroImg} alt="De fem sæsoner" className={styles.heroImage} />
       </section>
 
+      {/* Season symbol — alive, breathing */}
+      <section className={styles.symbolSection}>
+        <SeasonSymbol seasonId={current.id} color={current.color} size={120} />
+      </section>
+
+      {/* Current season — who you are right now */}
       <section className={styles.cards}>
-        <GlassCard glowColor={`${current.color}20`} className={styles.tappable}>
+        <GlassCard
+          glowColor={`${current.color}20`}
+          onClick={() => navigate(`/saesoner/${current.id}`)}
+          className={styles.tappable}
+        >
           <div className={styles.cardHeader}>
             <span className={styles.cardLabel}>Aktuel sæson</span>
             <span className={styles.cardAccent} style={{ color: current.color }}>
-              {current.element}
+              {current.element} · {current.direction}
             </span>
           </div>
           <h3 className={styles.cardTitle}>{current.name}</h3>
-          <p className={styles.cardQuote}>{current.monthLabel} · {current.direction}</p>
+          <p className={styles.cardQuote}>{current.monthLabel}</p>
           <p className={styles.cardBody}>{current.description}</p>
           <div className={styles.themes}>
             {current.themes.map(t => (
-              <span key={t} className={styles.theme} style={{ color: current.color, background: `${current.color}10` }}>{t}</span>
+              <span key={t} className={styles.theme} style={{ color: current.color, borderColor: `${current.color}30` }}>{t}</span>
             ))}
           </div>
+          <span className={styles.tapHint}>Udforsk denne sæson →</span>
         </GlassCard>
 
+        {/* Organ clock — what's happening RIGHT NOW */}
+        <GlassCard glowColor={`${today.organ.color}15`}>
+          <div className={styles.cardHeader}>
+            <span className={styles.cardLabel}>Lige nu</span>
+            <span className={styles.cardAccent} style={{ color: today.organ.color }}>
+              {today.organ.organ}
+            </span>
+          </div>
+          <div className={styles.organRow}>
+            <div className={styles.organDot} style={{ background: today.organ.color }} />
+            <div>
+              <p className={styles.organName}>{today.organ.organ}</p>
+              <p className={styles.organTime}>{today.organ.start}:00 — {today.organ.end}:00</p>
+            </div>
+          </div>
+          <p className={styles.cardBody}>{today.organ.guidance}</p>
+        </GlassCard>
+
+        {/* Daily wisdom — temporal, specific */}
         <GlassCard>
           <div className={styles.cardHeader}>
-            <span className={styles.cardLabel}>Dagens visdom</span>
+            <span className={styles.cardLabel}>Dagens refleksion</span>
           </div>
-          <p className={styles.wisdomQuote}>{wisdom}</p>
+          <p className={styles.wisdomQuote}>{today.dayWisdom}</p>
+          <span className={styles.tapHint} onClick={() => navigate('/praksis/journal')} style={{ cursor: 'pointer' }}>
+            Skriv i din journal →
+          </span>
         </GlassCard>
       </section>
     </div>
