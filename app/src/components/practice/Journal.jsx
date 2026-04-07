@@ -3,35 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { useSeason } from '../../context/SeasonContext';
 import GlassCard from '../common/GlassCard';
 import JournalInk from '../illustrations/JournalInk';
+import deepData from '../../data/seasonsDeep.json';
 import styles from './Journal.module.css';
 
-const promptsBySeason = {
-  foraar: [
-    'Hvor i dit liv har du brug for at trække en grænse lige nu?',
-    'Hvad vil du gerne forny i denne sæson?',
-    'Hvem eller hvad har du brug for at tilgive?',
-  ],
-  sommer: [
-    'Hvad giver dit liv mening lige nu?',
-    'Hvor vælger du frygt over kærlighed i dit liv?',
-    'Hvad brænder du for — og lever du det?',
-  ],
-  sensommer: [
-    'Hvad nærer dig virkelig — krop, sind og sjæl?',
-    'Hvad har du svært ved at modtage?',
-    'Hvor i kroppen mærker du ro? Og uro?',
-  ],
-  efteraar: [
-    'Hvad er du klar til at give slip på?',
-    'Hvad savner du — og kan du give sorgen plads?',
-    'Hvad er du taknemlig for lige nu?',
-  ],
-  vinter: [
-    'Hvad sker der når du virkelig hviler?',
-    'Hvad er din dybeste visdom lige nu?',
-    'Hvad frygter du — og kan du møde det med tillid?',
-  ],
-};
+// Use deep prompts from JSON, fallback to basic
+const promptsBySeason = Object.fromEntries(
+  Object.entries(deepData).map(([id, data]) => [id, data.journalPrompts || []])
+);
+
 
 export default function Journal() {
   const { current } = useSeason();
