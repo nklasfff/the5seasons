@@ -105,3 +105,21 @@ select {
   min-height: 100vh;
   min-height: 100dvh;
 }
+
+/* Desktop app frame — centers SPA in 700px container */
+@media (min-width: 768px) {
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 700px;
+    margin: 0 auto;
+    border-left: 1.5px solid var(--border);
+    border-right: 1.5px solid var(--border);
+    pointer-events: none;
+    z-index: 150;
+  }
+}
