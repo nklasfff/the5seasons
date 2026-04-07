@@ -126,7 +126,7 @@ export default function Meditation() {
         </div>
       </GlassCard>
 
-      <GlassCard className="animate-fade-up-delay-3" style={{ marginTop: 'var(--space-md)' }}>
+      <GlassCard className="animate-fade-up-delay-3" style={{ marginTop: 'var(--space-xl)' }}>
         <p className={styles.instructionLabel}>Sæsonens meditation</p>
         <p className={styles.instruction}>{current.meditation}</p>
       </GlassCard>

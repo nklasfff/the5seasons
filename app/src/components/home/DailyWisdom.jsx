@@ -46,10 +46,7 @@ export default function DailyWisdom() {
 
   return (
     <GlassCard className="animate-fade-up-delay-2">
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-xs)', marginBottom: 'var(--space-xs)' }}>
-        <WisdomLeaf size={28} />
-        <p className={styles.label}>Dagens visdom</p>
-      </div>
+      <p className={styles.label}>Dagens visdom</p>
       <p className={styles.quote}>{wisdom}</p>
       {activeOrgan && (
         <p className={styles.detail}>

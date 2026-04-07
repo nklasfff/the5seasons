@@ -1,6 +1,6 @@
 .header {
   text-align: center;
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-xl);
 }
 
 .symbolWrap {
@@ -36,8 +36,8 @@
 .sections {
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
-  margin-top: var(--space-md);
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
 }
 
 .sectionText {

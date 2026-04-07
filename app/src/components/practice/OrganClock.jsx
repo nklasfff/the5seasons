@@ -107,17 +107,6 @@ export default function OrganClockPage() {
         </svg>
       </div>
 
-      <GlassCard className="animate-fade-up-delay-2">
-        <div className={styles.organList}>
-          {organs.map((o, i) => (
-            <div key={i} className={`${styles.organItem} ${i === activeIdx ? styles.active : ''}`}>
-              <span className={styles.organTime}>{o.time}</span>
-              <span className={styles.organName}>{o.name}</span>
-              <span className={styles.organDot} style={{ background: o.color, opacity: i === activeIdx ? 1 : 0.3 }} />
-            </div>
-          ))}
-        </div>
-      </GlassCard>
     </div>
   );
 }
