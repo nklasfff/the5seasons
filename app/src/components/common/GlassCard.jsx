@@ -1,11 +1,14 @@
 import styles from './GlassCard.module.css';
 
-export default function GlassCard({ children, className = '', glowColor, style, ...props }) {
+export default function GlassCard({ children, className = '', onClick, glowColor, style }) {
   return (
     <div
       className={`${styles.card} ${className}`}
-      style={{ '--card-glow': glowColor, ...style }}
-      {...props}
+      onClick={onClick}
+      style={{
+        ...style,
+        '--card-glow': glowColor || 'transparent',
+      }}
     >
       {children}
     </div>

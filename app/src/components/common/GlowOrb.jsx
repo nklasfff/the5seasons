@@ -1,17 +1,17 @@
-export default function GlowOrb({ color = 'var(--accent-light)', size = 350, top, right, bottom, left, delay = 0 }) {
+export default function GlowOrb({ color = 'var(--glow-blue)', size = 300, top, left, right, bottom, delay = 0 }) {
   return (
     <div
       style={{
         position: 'fixed',
-        width: `${size}px`,
-        height: `${size}px`,
+        width: size,
+        height: size,
         borderRadius: '50%',
         background: `radial-gradient(circle, ${color} 0%, transparent 70%)`,
-        filter: 'blur(80px)',
         opacity: 0.15,
+        filter: 'blur(80px)',
         pointerEvents: 'none',
         zIndex: 0,
-        top, right, bottom, left,
+        top, left, right, bottom,
         animation: `drift 20s ease-in-out ${delay}s infinite`,
       }}
     />

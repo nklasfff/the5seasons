@@ -1,13 +1,38 @@
 .shell {
-  min-height: 100dvh;
   position: relative;
-  background: var(--bg);
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 .main {
   position: relative;
   z-index: 1;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: var(--space-xl) var(--space-lg) calc(72px + var(--space-2xl) + env(safe-area-inset-bottom, 0));
+  padding-bottom: calc(var(--bottom-nav-height) + var(--safe-bottom) + var(--space-md));
+}
+
+/* Theme toggle — fixed top right, subtle */
+.themeBtn {
+  position: fixed;
+  top: calc(var(--safe-top, 0px) + 14px);
+  right: 16px;
+  z-index: 100;
+  background: none;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  color: var(--text-muted);
+  opacity: 0.5;
+  transition: opacity var(--transition), color var(--transition);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.themeBtn:hover {
+  opacity: 0.85;
+  color: var(--text-secondary);
+}
+
+.themeIcon {
+  width: 18px;
+  height: 18px;
+  display: block;
 }

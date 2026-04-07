@@ -1,62 +1,71 @@
 import { NavLink } from 'react-router-dom';
+import { useSeason } from '../../context/SeasonContext';
 import styles from './BottomNav.module.css';
 
 const tabs = [
-  {
-    to: '/hjem',
-    label: 'Hjem',
-    icon: (
-      <svg viewBox="0 0 24 24">
-        <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1h-2z" />
-      </svg>
-    ),
-  },
-  {
-    to: '/saesoner',
-    label: 'Saesoner',
-    icon: (
-      <svg viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="9" />
-        <path d="M12 3a9 9 0 010 18" />
-        <circle cx="12" cy="12" r="3" />
-      </svg>
-    ),
-  },
-  {
-    to: '/praksis',
-    label: 'Praksis',
-    icon: (
-      <svg viewBox="0 0 24 24">
-        <path d="M12 6v6l4 2" />
-        <circle cx="12" cy="12" r="9" />
-      </svg>
-    ),
-  },
-  {
-    to: '/profil',
-    label: 'Profil',
-    icon: (
-      <svg viewBox="0 0 24 24">
-        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
-        <circle cx="12" cy="7" r="4" />
-      </svg>
-    ),
-  },
+  { path: '/hjem', label: 'Hjem', icon: HomeIcon },
+  { path: '/saesoner', label: 'Sæsoner', icon: SeasonsIcon },
+  { path: '/praksis', label: 'Praksis', icon: PracticeIcon },
+  { path: '/profil', label: 'Profil', icon: ProfileIcon },
 ];
 
 export default function BottomNav() {
+  const { current } = useSeason();
+
   return (
-    <nav className={styles.nav}>
-      {tabs.map(({ to, label, icon }) => (
+    <nav className={styles.nav} style={{ '--accent': current.color }}>
+      {tabs.map(({ path, label, icon: Icon }) => (
         <NavLink
-          key={to}
-          to={to}
+          key={path}
+          to={path}
           className={({ isActive }) => `${styles.tab} ${isActive ? styles.active : ''}`}
         >
-          {icon}
-          <span className={styles.tabLabel}>{label}</span>
+          <Icon />
+          <span className={styles.label}>{label}</span>
         </NavLink>
       ))}
     </nav>
+  );
+}
+
+function HomeIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="3" />
+      <line x1="12" y1="3" x2="12" y2="6" />
+      <line x1="12" y1="18" x2="12" y2="21" />
+      <line x1="3" y1="12" x2="6" y2="12" />
+      <line x1="18" y1="12" x2="21" y2="12" />
+    </svg>
+  );
+}
+
+function SeasonsIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <circle cx="12" cy="6" r="3" />
+      <circle cx="12" cy="18" r="3" />
+      <line x1="12" y1="9" x2="12" y2="15" />
+      <line x1="6" y1="12" x2="18" y2="12" strokeDasharray="2 2" />
+    </svg>
+  );
+}
+
+function PracticeIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <circle cx="12" cy="12" r="9" />
+      <polyline points="12,7 12,12 16,14" />
+    </svg>
+  );
+}
+
+function ProfileIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <circle cx="12" cy="8" r="4" />
+      <path d="M4 20c0-4 4-6 8-6s8 2 8 6" />
+    </svg>
   );
 }

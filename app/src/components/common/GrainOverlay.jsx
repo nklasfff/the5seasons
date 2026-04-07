@@ -1,15 +1,16 @@
 export default function GrainOverlay() {
   return (
     <svg
+      aria-hidden="true"
       style={{
         position: 'fixed',
         inset: 0,
         width: '100%',
         height: '100%',
         opacity: 0.03,
-        mixBlendMode: 'overlay',
         pointerEvents: 'none',
         zIndex: 0,
+        mixBlendMode: 'overlay',
       }}
     >
       <filter id="grain">
