@@ -1,0 +1,89 @@
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-bottom: var(--space-md);
+  cursor: pointer;
+}
+
+.back:hover {
+  color: var(--text-bright);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 1.8rem;
+  color: var(--text-bright);
+  margin-bottom: var(--space-md);
+  text-align: center;
+}
+
+.breatheCircle {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  margin: var(--space-lg) auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: var(--accent);
+  transition: transform 4s ease-in-out, opacity 4s ease-in-out;
+}
+
+.breatheCircle.inhale {
+  transform: scale(1.2);
+  opacity: 1;
+}
+
+.breatheCircle.exhale {
+  transform: scale(0.85);
+  opacity: 0.6;
+}
+
+.timerDisplay {
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 300;
+  color: var(--text-bright);
+  margin-bottom: var(--space-md);
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.btn {
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: opacity var(--transition-fast);
+}
+
+.btnPrimary {
+  background: var(--accent);
+  color: white;
+}
+
+.btnSecondary {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+}
+
+.instruction {
+  text-align: center;
+  margin-top: var(--space-lg);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}

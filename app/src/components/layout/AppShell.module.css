@@ -1,0 +1,13 @@
+.shell {
+  min-height: 100dvh;
+  position: relative;
+  background: var(--bg);
+}
+
+.main {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-md) calc(72px + var(--space-xl) + env(safe-area-inset-bottom, 0));
+}

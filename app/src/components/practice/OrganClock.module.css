@@ -1,0 +1,88 @@
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-bottom: var(--space-md);
+  cursor: pointer;
+}
+
+.back:hover {
+  color: var(--text-bright);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 1.8rem;
+  color: var(--text-bright);
+  margin-bottom: var(--space-md);
+  text-align: center;
+}
+
+.clockWrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--space-lg);
+}
+
+.activeInfo {
+  text-align: center;
+  margin-bottom: var(--space-sm);
+}
+
+.activeLabel {
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-xs);
+}
+
+.activeOrgan {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: var(--text-bright);
+}
+
+.organList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.organItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+  transition: background var(--transition-fast);
+}
+
+.organItem.active {
+  background: var(--accent-glow);
+}
+
+.organTime {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  min-width: 60px;
+}
+
+.organName {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.organDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-left: auto;
+}
