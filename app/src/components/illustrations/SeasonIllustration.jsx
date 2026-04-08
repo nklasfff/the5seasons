@@ -1,6 +1,13 @@
 /**
- * Abstract, organic SVG illustrations for each element.
- * Multiple variants per element for different contexts.
+ * Organic, abstract SVG illustrations for each element.
+ * Multiple variants per element — each page uses a DIFFERENT one.
+ *
+ * Variant guide:
+ * 0 = The full expression (Season page)
+ * 1 = The roots/foundation (Elements page)
+ * 2 = The detail/leaf (decorative breaks)
+ * 3 = The seed/essence (Home page)
+ * 4 = The movement/flow (Practice page)
  */
 
 // --- WOOD / TRÆ ---
@@ -47,6 +54,16 @@ const TreeSeed = ({ color, o }) => (
   </svg>
 )
 
+const TreeFlow = ({ color, o }) => (
+  <svg viewBox="0 0 200 120" fill="none">
+    <path d="M20 90 C50 70, 70 40, 100 35 C130 30, 160 55, 180 30" stroke={color} strokeWidth="1.8" opacity={o} strokeLinecap="round" fill="none" />
+    <path d="M30 95 C55 80, 80 60, 105 58 C135 55, 155 72, 175 55" stroke={color} strokeWidth="1" opacity={o * 0.5} strokeLinecap="round" fill="none" />
+    <circle cx="100" cy="35" r="4" fill={color} opacity={o * 0.8} />
+    <circle cx="55" cy="75" r="2" fill={color} opacity={o * 0.4} />
+    <circle cx="155" cy="48" r="2.5" fill={color} opacity={o * 0.4} />
+  </svg>
+)
+
 // --- FIRE / ILD ---
 const FireRadiance = ({ color, o }) => (
   <svg viewBox="0 0 200 200" fill="none">
@@ -63,6 +80,27 @@ const FireFlame = ({ color, o }) => (
       fill={color} opacity={o * 0.5} />
     <path d="M60 160 C50 130, 38 105, 42 82 C44 68, 52 50, 60 35 C68 50, 76 68, 78 82 C82 105, 70 130, 60 160Z"
       fill={color} opacity={o * 0.3} />
+  </svg>
+)
+
+const FireSpark = ({ color, o }) => (
+  <svg viewBox="0 0 160 160" fill="none">
+    <circle cx="80" cy="80" r="8" fill={color} opacity={o} />
+    <path d="M80 50 L80 20" stroke={color} strokeWidth="1.2" opacity={o * 0.6} strokeLinecap="round" />
+    <path d="M80 110 L80 140" stroke={color} strokeWidth="1.2" opacity={o * 0.6} strokeLinecap="round" />
+    <path d="M50 80 L20 80" stroke={color} strokeWidth="1.2" opacity={o * 0.6} strokeLinecap="round" />
+    <path d="M110 80 L140 80" stroke={color} strokeWidth="1.2" opacity={o * 0.6} strokeLinecap="round" />
+    <path d="M59 59 L38 38" stroke={color} strokeWidth="0.8" opacity={o * 0.4} strokeLinecap="round" />
+    <path d="M101 59 L122 38" stroke={color} strokeWidth="0.8" opacity={o * 0.4} strokeLinecap="round" />
+    <path d="M59 101 L38 122" stroke={color} strokeWidth="0.8" opacity={o * 0.4} strokeLinecap="round" />
+    <path d="M101 101 L122 122" stroke={color} strokeWidth="0.8" opacity={o * 0.4} strokeLinecap="round" />
+  </svg>
+)
+
+const FireFlow = ({ color, o }) => (
+  <svg viewBox="0 0 200 120" fill="none">
+    <path d="M10 80 C40 40, 70 90, 100 50 C130 10, 160 70, 190 40" stroke={color} strokeWidth="1.5" opacity={o} strokeLinecap="round" fill="none" />
+    <circle cx="100" cy="50" r="5" fill={color} opacity={o * 0.6} />
   </svg>
 )
 
@@ -84,6 +122,22 @@ const EarthBowl = ({ color, o }) => (
   </svg>
 )
 
+const EarthSeed = ({ color, o }) => (
+  <svg viewBox="0 0 120 120" fill="none">
+    <ellipse cx="60" cy="70" rx="30" ry="22" fill={color} opacity={o * 0.4} />
+    <path d="M60 48 C60 35, 55 20, 60 10" stroke={color} strokeWidth="1" opacity={o * 0.6} strokeLinecap="round" />
+    <path d="M55 50 C48 38, 38 30, 32 25" stroke={color} strokeWidth="0.7" opacity={o * 0.4} strokeLinecap="round" />
+    <circle cx="60" cy="70" r="3" fill={color} opacity={o} />
+  </svg>
+)
+
+const EarthFlow = ({ color, o }) => (
+  <svg viewBox="0 0 200 120" fill="none">
+    <path d="M10 60 C50 80, 80 40, 100 60 C120 80, 150 40, 190 60" stroke={color} strokeWidth="1.5" opacity={o} strokeLinecap="round" fill="none" />
+    <path d="M30 70 C60 85, 85 50, 100 65 C115 80, 145 55, 170 70" stroke={color} strokeWidth="0.8" opacity={o * 0.4} strokeLinecap="round" fill="none" />
+  </svg>
+)
+
 // --- METAL ---
 const MetalDiamond = ({ color, o }) => (
   <svg viewBox="0 0 160 220" fill="none">
@@ -100,6 +154,21 @@ const MetalFeather = ({ color, o }) => (
     <path d="M50 60 C65 75, 80 82, 88 88" stroke={color} strokeWidth="0.6" opacity={o * 0.5} strokeLinecap="round" />
     <path d="M50 90 C35 105, 22 115, 18 125" stroke={color} strokeWidth="0.6" opacity={o * 0.5} strokeLinecap="round" />
     <path d="M50 120 C65 132, 78 140, 85 148" stroke={color} strokeWidth="0.6" opacity={o * 0.5} strokeLinecap="round" />
+  </svg>
+)
+
+const MetalCrescent = ({ color, o }) => (
+  <svg viewBox="0 0 140 140" fill="none">
+    <path d="M90 20 C55 30, 30 60, 30 90 C30 120, 55 140, 90 130 C65 125, 48 105, 48 90 C48 70, 65 45, 90 20Z"
+      fill={color} opacity={o * 0.5} />
+  </svg>
+)
+
+const MetalFlow = ({ color, o }) => (
+  <svg viewBox="0 0 200 120" fill="none">
+    <path d="M10 60 L50 30 L90 60 L130 30 L170 60 L190 45" stroke={color} strokeWidth="1.2" opacity={o} strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    <circle cx="50" cy="30" r="2" fill={color} opacity={o * 0.6} />
+    <circle cx="130" cy="30" r="2" fill={color} opacity={o * 0.6} />
   </svg>
 )
 
@@ -124,24 +193,53 @@ const WaterDrop = ({ color, o }) => (
   </svg>
 )
 
-// Variant maps — multiple illustrations per element
+const WaterPool = ({ color, o }) => (
+  <svg viewBox="0 0 160 100" fill="none">
+    <ellipse cx="80" cy="60" rx="60" ry="25" fill={color} opacity={o * 0.3} />
+    <ellipse cx="80" cy="55" rx="40" ry="15" stroke={color} strokeWidth="0.6" opacity={o * 0.5} fill="none" />
+    <ellipse cx="80" cy="50" rx="18" ry="7" stroke={color} strokeWidth="0.4" opacity={o * 0.7} fill="none" />
+    <circle cx="80" cy="48" r="2" fill={color} opacity={o} />
+  </svg>
+)
+
+const WaterFlow = ({ color, o }) => (
+  <svg viewBox="0 0 200 120" fill="none">
+    <path d="M10 60 C30 40, 50 80, 80 55 C110 30, 130 75, 160 50 C175 42, 185 55, 195 48" stroke={color} strokeWidth="1.5" opacity={o} strokeLinecap="round" fill="none" />
+    <circle cx="80" cy="55" r="3" fill={color} opacity={o * 0.5} />
+    <circle cx="160" cy="50" r="2" fill={color} opacity={o * 0.4} />
+  </svg>
+)
+
+// Variant maps — 5 variants per element for different contexts
 const VARIANTS = {
-  'Træ':   [TreeSpire, TreeRoots, TreeLeaf, TreeSeed],
-  'Ild':   [FireRadiance, FireFlame, FireRadiance],
-  'Jord':  [EarthLayers, EarthBowl, EarthLayers],
-  'Metal': [MetalDiamond, MetalFeather, MetalDiamond],
-  'Vand':  [WaterWaves, WaterDrop, WaterWaves],
+  'Træ':   [TreeSpire, TreeRoots, TreeLeaf, TreeSeed, TreeFlow],
+  'Ild':   [FireRadiance, FireFlame, FireSpark, FireSpark, FireFlow],
+  'Jord':  [EarthLayers, EarthBowl, EarthSeed, EarthSeed, EarthFlow],
+  'Metal': [MetalDiamond, MetalFeather, MetalCrescent, MetalCrescent, MetalFlow],
+  'Vand':  [WaterWaves, WaterDrop, WaterPool, WaterPool, WaterFlow],
 }
 
-export default function SeasonIllustration({ element, variant = 0, size = 160, color = '#C89494', opacity = 0.35 }) {
+export default function SeasonIllustration({ element, variant = 0, size = 160, color, opacity = 0.35 }) {
   const variants = VARIANTS[element]
   if (!variants) return null
 
   const Component = variants[variant % variants.length]
+  const resolvedColor = color || getDefaultColor(element)
 
   return (
     <div style={{ width: size, height: size, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <Component color={color} o={opacity} />
+      <Component color={resolvedColor} o={opacity} />
     </div>
   )
+}
+
+function getDefaultColor(element) {
+  const colors = {
+    'Træ': '#6B8F5E',
+    'Ild': '#C27052',
+    'Jord': '#B8963E',
+    'Metal': '#8A8A80',
+    'Vand': '#4A6E8C',
+  }
+  return colors[element] || '#C2967E'
 }

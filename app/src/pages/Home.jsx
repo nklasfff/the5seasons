@@ -5,14 +5,13 @@ import SeasonIllustration from '../components/illustrations/SeasonIllustration'
 import styles from './Home.module.css'
 
 /*
- * "I dag" — the daily landing.
+ * "I dag" — Your daily companion.
  *
- * This is not a dashboard. It's a warm invitation.
- * Isabelle's voice: gentle, clear, one thing at a time.
- * "Det du nærer, vokser."
+ * Uses variant 3 (seed/essence) — the beginning of the day.
+ * Shows organ clock guidance (time-specific TCM advice).
+ * One practice, one reflection, one food. Warm and focused.
  */
 
-// Seasonal invitations — her tone: warm, direct, poetic
 const SEASON_INVITATIONS = {
   foraar: 'Foråret inviterer dig til at vokse. Hvad vil du give plads til?',
   sommer: 'Sommeren åbner dit hjerte. Hvad vil du forbinde dig med i dag?',
@@ -21,7 +20,6 @@ const SEASON_INVITATIONS = {
   vinter: 'Vinteren holder dig. Hvad finder du, når du lytter indad?',
 }
 
-// Practice type names in her language
 const PRACTICE_NAMES = {
   breathing: 'Åndedræt',
   yoga: 'Yoga',
@@ -32,16 +30,20 @@ const PRACTICE_NAMES = {
 
 export default function Home({ time, season, dynamics }) {
   const { current, deep } = season
-  const { greeting, mood } = time
+  const { greeting, mood, organ, hour } = time
   const { recommendation } = dynamics
 
   const philosophy = useMemo(() => dailyRotation(deep?.philosophy, 3), [deep])
   const journalPrompt = useMemo(() => dailyRotation(deep?.journalPrompts), [deep])
   const foodTip = useMemo(() => dailyRotation(deep?.foodGuide, 7), [deep])
 
-  const invitation = SEASON_INVITATIONS[current.id]
+  // Organ clock advice — what to do/avoid RIGHT NOW
+  const organAdvice = useMemo(() => {
+    if (!deep?.organClockGuide || !organ) return null
+    return deep.organClockGuide.find(g => g.organ === organ.name)
+  }, [deep, organ])
 
-  // Today's practice — one clear recommendation
+  // Today's practice
   const todaysPractice = useMemo(() => {
     const focus = recommendation?.focus || 'meditation'
     if (focus === 'breathing') {
@@ -66,7 +68,7 @@ export default function Home({ time, season, dynamics }) {
     return null
   }, [deep, recommendation, current.element])
 
-  // Truncate philosophy to first two sentences
+  // Wisdom — first two sentences
   const wisdomText = useMemo(() => {
     if (!philosophy) return ''
     const firstDot = philosophy.indexOf('.', 40)
@@ -76,20 +78,32 @@ export default function Home({ time, season, dynamics }) {
     return philosophy.slice(0, 160)
   }, [philosophy])
 
+  const timeString = `${String(hour).padStart(2, '0')}:${String(time.now.getMinutes()).padStart(2, '0')}`
+
   return (
     <div className={styles.page}>
 
-      {/* === SEASONAL WELCOME === */}
+      {/* === WELCOME — seed illustration, seasonal greeting === */}
       <section className={styles.welcome}>
-        <div className={styles.welcomeIllustration}>
-          <SeasonIllustration element={current.element} variant={0} size={140} opacity={0.35} />
-        </div>
+        <SeasonIllustration element={current.element} variant={3} size={90} opacity={0.35} />
         <h1 className={styles.greeting}>{greeting}</h1>
         <p className={styles.seasonLabel}>{current.name}</p>
-        <p className={styles.invitation}>{invitation}</p>
+        <p className={styles.invitation}>{SEASON_INVITATIONS[current.id]}</p>
       </section>
 
-      {/* === TODAY'S PRACTICE — one clear suggestion === */}
+      {/* === ORGAN CLOCK — time-specific TCM wisdom === */}
+      {organAdvice && (
+        <section className={styles.organClock}>
+          <div className={styles.organHeader}>
+            <span className={styles.organTime}>{timeString}</span>
+            <span className={styles.organName}>{organ.name}-tid</span>
+          </div>
+          <p className={styles.organDo}>{organAdvice.doThis}</p>
+          <p className={styles.organAvoid}>{organAdvice.avoidThis}</p>
+        </section>
+      )}
+
+      {/* === TODAY'S PRACTICE === */}
       {todaysPractice && (
         <section className={styles.card}>
           <span className={styles.cardLabel}>Din praksis i dag</span>
@@ -100,7 +114,7 @@ export default function Home({ time, season, dynamics }) {
         </section>
       )}
 
-      {/* === SEASONAL WISDOM — from her book === */}
+      {/* === WISDOM === */}
       {wisdomText && (
         <section className={styles.wisdom}>
           <blockquote className={styles.wisdomQuote}>{wisdomText}</blockquote>
@@ -108,7 +122,7 @@ export default function Home({ time, season, dynamics }) {
         </section>
       )}
 
-      {/* === JOURNAL REFLECTION === */}
+      {/* === JOURNAL === */}
       {journalPrompt && (
         <section className={styles.card}>
           <span className={styles.cardLabel}>Til refleksion</span>
@@ -116,12 +130,15 @@ export default function Home({ time, season, dynamics }) {
         </section>
       )}
 
-      {/* === FOOD WISDOM === */}
+      {/* === FOOD === */}
       {foodTip && (
         <section className={styles.card}>
           <span className={styles.cardLabel}>Fra sæsonens køkken</span>
           <h3 className={styles.foodName}>{foodTip.name}</h3>
           <p className={styles.foodDescription}>{foodTip.why}</p>
+          {foodTip.preparation && (
+            <p className={styles.foodPrep}>{foodTip.preparation}</p>
+          )}
         </section>
       )}
 
