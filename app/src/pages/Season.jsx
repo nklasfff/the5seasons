@@ -3,23 +3,13 @@ import Reveal from '../components/Reveal'
 import SeasonIllustration from '../components/illustrations/SeasonIllustration'
 import styles from './Season.module.css'
 
-/*
- * "Sæsonen" — The FULL chapter. ALL content visible.
- *
- * Philosophy (all 4), emotions, ALL symptoms, ALL foods,
- * yoga preview, acupressure, weekly check-in, milestones.
- * Like reading her entire chapter for this season.
- */
-
 export default function Season({ season }) {
   const { current, deep } = season
-
   if (!deep) return null
 
   return (
     <div className={styles.page}>
 
-      {/* === OPENING === */}
       <section className={styles.opening}>
         <SeasonIllustration element={current.element} variant={0} size={180} opacity={0.3} />
         <h1 className={styles.seasonName}>{current.name}</h1>
@@ -27,12 +17,11 @@ export default function Season({ season }) {
         <p className={styles.months}>{current.monthLabel}</p>
       </section>
 
-      {/* === ESSENCE === */}
       <section className={styles.essence}>
         <p className={styles.essenceText}>{current.description}</p>
       </section>
 
-      {/* === EMOTIONAL LANDSCAPE === */}
+      {/* === EMOTIONS — always visible, compact === */}
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}>Følelsernes landskab</h2>
         <div className={styles.emotionPair}>
@@ -53,47 +42,60 @@ export default function Season({ season }) {
         </div>
       </section>
 
-      {/* === ALL PHILOSOPHY TEXTS === */}
+      {/* === PHILOSOPHY — first text visible, rest foldable === */}
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}>Sæsonens filosofi</h2>
-        {deep.philosophy?.map((text, i) => (
-          <div key={i} className={styles.philosophyBlock}>
-            {i === 0 ? (
-              <p className={styles.philosophyText}>{text}</p>
-            ) : (
-              <Reveal preview={<span className={styles.revealHint}>Læs videre</span>}>
-                <p className={styles.philosophyText}>{text}</p>
-              </Reveal>
-            )}
-          </div>
-        ))}
+        {deep.philosophy?.[0] && (
+          <p className={styles.philosophyText}>{deep.philosophy[0]}</p>
+        )}
+        {deep.philosophy?.length > 1 && (
+          <Reveal preview={<span className={styles.revealHint}>Læs de øvrige {deep.philosophy.length - 1} tekster</span>}>
+            <div className={styles.foldedContent}>
+              {deep.philosophy.slice(1).map((text, i) => (
+                <p key={i} className={styles.philosophyText}>{text}</p>
+              ))}
+            </div>
+          </Reveal>
+        )}
       </section>
 
       <div className={styles.illustrationBreak}>
         <SeasonIllustration element={current.element} variant={2} size={44} opacity={0.15} />
       </div>
 
-      {/* === ALL BODY SIGNALS === */}
+      {/* === BODY SIGNALS — first visible, rest in fold === */}
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}>Kroppens signaler</h2>
-        <p className={styles.sectionIntro}>
-          Når {current.element.toLowerCase()}-energien er i ubalance, kan kroppen sende disse signaler.
-        </p>
-        {deep.symptoms?.map((s, i) => (
-          <div key={i} className={styles.symptomCard}>
-            <h3 className={styles.symptomTitle}>{s.symptom}</h3>
+        {deep.symptoms?.[0] && (
+          <div className={styles.card}>
+            <h3 className={styles.cardTitle}>{deep.symptoms[0].symptom}</h3>
             <Reveal preview={<span className={styles.revealHint}>Forstå og lindre</span>}>
-              <p className={styles.bodyText}>{s.explanation}</p>
-              <p className={styles.remedy}>{s.remedy}</p>
+              <p className={styles.bodyText}>{deep.symptoms[0].explanation}</p>
+              <p className={styles.remedy}>{deep.symptoms[0].remedy}</p>
             </Reveal>
           </div>
-        ))}
+        )}
+        {deep.symptoms?.length > 1 && (
+          <Reveal preview={<span className={styles.revealHint}>Se alle {deep.symptoms.length} signaler</span>}>
+            <div className={styles.foldedContent}>
+              {deep.symptoms.slice(1).map((s, i) => (
+                <div key={i} className={styles.card}>
+                  <h3 className={styles.cardTitle}>{s.symptom}</h3>
+                  <Reveal preview={<span className={styles.revealHint}>Forstå og lindre</span>}>
+                    <p className={styles.bodyText}>{s.explanation}</p>
+                    <p className={styles.remedy}>{s.remedy}</p>
+                  </Reveal>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        )}
       </section>
 
       {/* === PRACTICE PREVIEW — links to Øvelser === */}
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}>Sæsonens praksis</h2>
-        <div className={styles.practicePreview}>
+        <div className={styles.practiceGrid}>
           <div className={styles.practiceItem}>
             <span className={styles.practiceLabel}>Yoga</span>
             <span className={styles.practiceCount}>{deep.yogaSequence?.length} stillinger</span>
@@ -111,91 +113,123 @@ export default function Season({ season }) {
             <span className={styles.practiceCount}>{deep.acupressure?.length} punkter</span>
           </div>
         </div>
-        <Link to="/oevelser" className={styles.practiceLink}>Gå til alle øvelser</Link>
+        <Link to="/oevelser" className={styles.link}>Gå til alle øvelser</Link>
       </section>
 
       <div className={styles.illustrationBreak}>
         <SeasonIllustration element={current.element} variant={1} size={44} opacity={0.15} />
       </div>
 
-      {/* === ALL FOODS === */}
+      {/* === FOOD — first visible, rest in fold === */}
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}>Fra sæsonens køkken</h2>
         <p className={styles.sectionIntro}>
           Den {current.flavor.toLowerCase()}e smag styrker {current.organs.yin.toLowerCase()}en.
         </p>
-        <div className={styles.foodGrid}>
-          {deep.foodGuide?.map((food, i) => (
-            <div key={i} className={styles.foodCard}>
-              <h3 className={styles.foodName}>{food.name}</h3>
-              <Reveal preview={<span className={styles.revealHint}>Hvorfor og hvordan</span>}>
-                <p className={styles.bodyText}>{food.why}</p>
-                {food.preparation && <p className={styles.remedy}>{food.preparation}</p>}
-              </Reveal>
+        {deep.foodGuide?.[0] && (
+          <div className={styles.card}>
+            <h3 className={styles.cardTitle}>{deep.foodGuide[0].name}</h3>
+            <Reveal preview={<span className={styles.revealHint}>Hvorfor og hvordan</span>}>
+              <p className={styles.bodyText}>{deep.foodGuide[0].why}</p>
+              {deep.foodGuide[0].preparation && <p className={styles.remedy}>{deep.foodGuide[0].preparation}</p>}
+            </Reveal>
+          </div>
+        )}
+        {deep.foodGuide?.length > 1 && (
+          <Reveal preview={<span className={styles.revealHint}>Se alle {deep.foodGuide.length} fødevarer</span>}>
+            <div className={styles.foldedContent}>
+              {deep.foodGuide.slice(1).map((food, i) => (
+                <div key={i} className={styles.card}>
+                  <h3 className={styles.cardTitle}>{food.name}</h3>
+                  <Reveal preview={<span className={styles.revealHint}>Hvorfor og hvordan</span>}>
+                    <p className={styles.bodyText}>{food.why}</p>
+                    {food.preparation && <p className={styles.remedy}>{food.preparation}</p>}
+                  </Reveal>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </Reveal>
+        )}
       </section>
 
-      {/* === ORGAN CLOCK GUIDE === */}
+      {/* === ORGAN CLOCK — compact, foldable === */}
       {deep.organClockGuide && (
         <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Organur — {current.organs.yin} & {current.organs.yang}</h2>
-          {deep.organClockGuide.map((g, i) => (
-            <div key={i} className={styles.clockCard}>
-              <span className={styles.clockTime}>Kl. {g.time}</span>
-              <span className={styles.clockOrgan}>{g.organ}</span>
-              <p className={styles.clockDo}>{g.doThis}</p>
-              <p className={styles.clockAvoid}>{g.avoidThis}</p>
+          <h2 className={styles.sectionTitle}>Organur</h2>
+          <Reveal preview={
+            <span className={styles.revealHint}>
+              {current.organs.yin} & {current.organs.yang} — se tiderne
+            </span>
+          }>
+            <div className={styles.foldedContent}>
+              {deep.organClockGuide.map((g, i) => (
+                <div key={i} className={styles.clockItem}>
+                  <div className={styles.clockHeader}>
+                    <span className={styles.clockTime}>Kl. {g.time}</span>
+                    <span className={styles.clockOrgan}>{g.organ}</span>
+                  </div>
+                  <p className={styles.bodyText}>{g.doThis}</p>
+                  <p className={styles.clockAvoid}>{g.avoidThis}</p>
+                </div>
+              ))}
             </div>
-          ))}
+          </Reveal>
         </section>
       )}
 
-      {/* === WEEKLY CHECK-IN === */}
+      {/* === WEEKLY CHECK-IN — foldable === */}
       {deep.weeklyCheckIn && (
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Ugens tjek-ind</h2>
-          <p className={styles.sectionIntro}>Refleksionsspørgsmål til din uge.</p>
-          <ol className={styles.checkInList}>
-            {deep.weeklyCheckIn.map((q, i) => (
-              <li key={i} className={styles.checkInItem}>{q}</li>
-            ))}
-          </ol>
+          <Reveal preview={<span className={styles.revealHint}>{deep.weeklyCheckIn.length} refleksionsspørgsmål</span>}>
+            <ol className={styles.numberedList}>
+              {deep.weeklyCheckIn.map((q, i) => (
+                <li key={i} className={styles.numberedItem}>{q}</li>
+              ))}
+            </ol>
+          </Reveal>
         </section>
       )}
 
-      {/* === MILESTONES === */}
+      {/* === MILESTONES — foldable === */}
       {deep.milestones && (
         <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Din rejse gennem {current.name.toLowerCase()}en</h2>
-          <div className={styles.milestones}>
-            {deep.milestones.map((m, i) => {
-              const [label, ...rest] = m.split(':')
-              return (
-                <div key={i} className={styles.milestone}>
-                  <span className={styles.milestoneLabel}>{label.trim()}</span>
-                  <p className={styles.milestoneText}>{rest.join(':').trim()}</p>
-                </div>
-              )
-            })}
-          </div>
+          <h2 className={styles.sectionTitle}>Din rejse</h2>
+          <Reveal preview={<span className={styles.revealHint}>Se {deep.milestones.length} milepæle</span>}>
+            <div className={styles.milestones}>
+              {deep.milestones.map((m, i) => {
+                const [label, ...rest] = m.split(':')
+                return (
+                  <div key={i} className={styles.milestone}>
+                    <span className={styles.milestoneLabel}>{label.trim()}</span>
+                    <p className={styles.milestoneText}>{rest.join(':').trim()}</p>
+                  </div>
+                )
+              })}
+            </div>
+          </Reveal>
         </section>
       )}
 
-      {/* === JOURNAL PROMPTS — all 10 === */}
+      {/* === JOURNAL — first 3 visible, rest foldable === */}
       {deep.journalPrompts && (
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Sæsonens refleksioner</h2>
-          <div className={styles.journalList}>
-            {deep.journalPrompts.map((prompt, i) => (
-              <p key={i} className={styles.journalPrompt}>{prompt}</p>
-            ))}
-          </div>
+          {deep.journalPrompts.slice(0, 3).map((prompt, i) => (
+            <p key={i} className={styles.journalPrompt}>{prompt}</p>
+          ))}
+          {deep.journalPrompts.length > 3 && (
+            <Reveal preview={<span className={styles.revealHint}>Se alle {deep.journalPrompts.length} refleksioner</span>}>
+              <div className={styles.foldedContent}>
+                {deep.journalPrompts.slice(3).map((prompt, i) => (
+                  <p key={i} className={styles.journalPrompt}>{prompt}</p>
+                ))}
+              </div>
+            </Reveal>
+          )}
         </section>
       )}
 
-      {/* === FOOTER === */}
       <footer className={styles.footer}>
         <div className={styles.footerRow}>
           <span className={styles.footerLabel}>Organer</span>

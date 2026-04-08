@@ -64,7 +64,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: var(--space-xs);
+  gap: var(--space-sm);
   border-top: 1px solid var(--color-divider);
 }
 
@@ -75,7 +75,6 @@
   text-transform: uppercase;
   color: var(--color-text-muted);
   font-weight: 400;
-  margin-bottom: var(--space-xs);
 }
 
 .sectionIntro {
@@ -84,8 +83,7 @@
   color: var(--color-text-muted);
   font-style: italic;
   font-weight: 300;
-  margin-bottom: var(--space-sm);
-  max-width: 30ch;
+  max-width: 28ch;
   line-height: 1.6;
 }
 
@@ -94,7 +92,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-md);
-  margin: var(--space-sm) 0;
+  margin: var(--space-xs) 0;
 }
 
 .emotionSide {
@@ -115,14 +113,12 @@
   font-family: var(--font-serif);
   font-size: 0.92rem;
   color: var(--color-text);
-  font-weight: 400;
 }
 
 .emotionValueMuted {
   font-family: var(--font-serif);
   font-size: 0.92rem;
   color: var(--color-text-muted);
-  font-weight: 400;
 }
 
 .emotionBridge {
@@ -137,7 +133,6 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.3rem;
-  margin-top: var(--space-xs);
 }
 
 .theme {
@@ -150,14 +145,9 @@
 }
 
 /* === PHILOSOPHY === */
-.philosophyBlock {
-  width: 100%;
-  margin-bottom: var(--space-sm);
-}
-
 .philosophyText {
   font-family: var(--font-serif);
-  font-size: clamp(0.9rem, 2.3vw, 1rem);
+  font-size: clamp(0.88rem, 2.2vw, 0.98rem);
   color: var(--color-text-soft);
   font-weight: 300;
   max-width: 34ch;
@@ -166,24 +156,24 @@
   margin: 0 auto;
 }
 
-/* === ILLUSTRATION BREAK === */
+/* === ILLUSTRATION === */
 .illustrationBreak {
   display: flex;
   justify-content: center;
   padding: var(--space-xs) 0;
 }
 
-/* === BODY SIGNALS === */
-.symptomCard {
+/* === CARD — the gentle container === */
+.card {
   width: 100%;
   background: var(--color-bg-card);
   border: 1px solid var(--color-divider);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   padding: var(--space-md);
-  margin-bottom: var(--space-xs);
+  text-align: center;
 }
 
-.symptomTitle {
+.cardTitle {
   font-family: var(--font-serif);
   font-size: 1rem;
   font-weight: 400;
@@ -192,6 +182,16 @@
   margin-bottom: var(--space-xs);
 }
 
+/* === FOLDED CONTENT — revealed content container === */
+.foldedContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  width: 100%;
+  margin-top: var(--space-sm);
+}
+
+/* === BODY TEXT & REMEDY === */
 .bodyText {
   font-family: var(--font-serif);
   font-size: 0.85rem;
@@ -221,13 +221,12 @@
   font-style: italic;
 }
 
-/* === PRACTICE PREVIEW === */
-.practicePreview {
+/* === PRACTICE GRID === */
+.practiceGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-xs);
   width: 100%;
-  margin: var(--space-sm) 0;
 }
 
 .practiceItem {
@@ -244,7 +243,6 @@
   font-family: var(--font-serif);
   font-size: 0.78rem;
   color: var(--color-text);
-  font-weight: 400;
 }
 
 .practiceCount {
@@ -253,74 +251,47 @@
   letter-spacing: 0.08em;
 }
 
-.practiceLink {
+.link {
   font-family: var(--font-serif);
   font-size: 0.75rem;
   color: var(--color-accent);
   text-decoration: none;
   font-style: italic;
-  opacity: 0.65;
-  transition: opacity 0.2s ease;
+  opacity: 0.6;
+  transition: opacity 0.2s;
 }
 
-.practiceLink:hover { opacity: 1; }
+.link:hover { opacity: 1; }
 
-/* === FOOD GRID === */
-.foodGrid {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
-  width: 100%;
-}
-
-.foodCard {
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-divider);
-  border-radius: var(--radius-md);
-  padding: var(--space-md);
-}
-
-.foodName {
-  font-family: var(--font-serif);
-  font-size: 1rem;
-  font-weight: 400;
-  color: var(--color-text);
-  margin-bottom: var(--space-xs);
-}
-
-/* === ORGAN CLOCK === */
-.clockCard {
-  width: 100%;
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-divider);
-  border-radius: var(--radius-md);
-  padding: var(--space-md);
-  margin-bottom: var(--space-xs);
+/* === CLOCK === */
+.clockItem {
   text-align: left;
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--color-divider);
+}
+
+.clockItem:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.clockHeader {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xs);
 }
 
 .clockTime {
   font-size: 0.6rem;
   letter-spacing: 0.15em;
-  text-transform: uppercase;
   color: var(--color-text-faint);
 }
 
 .clockOrgan {
   font-family: var(--font-serif);
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   color: var(--color-accent);
-  font-weight: 400;
-  margin-left: var(--space-sm);
-}
-
-.clockDo {
-  font-family: var(--font-serif);
-  font-size: 0.82rem;
-  color: var(--color-text-soft);
-  font-weight: 300;
-  line-height: 1.65;
-  margin-top: var(--space-xs);
 }
 
 .clockAvoid {
@@ -333,36 +304,36 @@
   margin-top: var(--space-3xs);
 }
 
-/* === WEEKLY CHECK-IN === */
-.checkInList {
+/* === NUMBERED LIST === */
+.numberedList {
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
   width: 100%;
-  counter-reset: checkin;
+  counter-reset: item;
 }
 
-.checkInItem {
+.numberedItem {
   font-family: var(--font-serif);
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   color: var(--color-text-soft);
   font-weight: 300;
   line-height: 1.6;
   text-align: left;
   padding-left: var(--space-md);
   position: relative;
-  counter-increment: checkin;
+  counter-increment: item;
 }
 
-.checkInItem::before {
-  content: counter(checkin);
+.numberedItem::before {
+  content: counter(item);
   position: absolute;
   left: 0;
   font-family: var(--font-serif);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--color-accent);
-  opacity: 0.35;
+  opacity: 0.3;
 }
 
 /* === MILESTONES === */
@@ -381,10 +352,9 @@
 
 .milestoneLabel {
   font-size: 0.6rem;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-accent);
-  font-weight: 400;
 }
 
 .milestoneText {
@@ -396,14 +366,7 @@
   margin-top: var(--space-3xs);
 }
 
-/* === JOURNAL PROMPTS === */
-.journalList {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-  width: 100%;
-}
-
+/* === JOURNAL === */
 .journalPrompt {
   font-family: var(--font-serif);
   font-size: 0.92rem;
@@ -411,7 +374,7 @@
   font-weight: 300;
   line-height: 1.5;
   text-align: center;
-  max-width: 26ch;
+  max-width: 24ch;
   margin: 0 auto;
   padding-bottom: var(--space-md);
   border-bottom: 1px solid var(--color-divider);
