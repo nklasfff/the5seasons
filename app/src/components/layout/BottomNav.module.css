@@ -1,51 +1,69 @@
+/* =========================================
+   BOTTOM NAV — Elegant, minimal tab bar
+   Floating glass effect on mobile
+   ========================================= */
+
 .nav {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 100;
+  padding: 0 var(--space-sm) calc(var(--space-xs) + var(--safe-bottom));
+  background: var(--color-bg-nav);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--color-divider);
+}
+
+.inner {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  height: var(--bottom-nav-height);
-  padding-bottom: var(--safe-bottom);
-  background: var(--nav-bg);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-top: 1px solid var(--glass-border);
-  z-index: 100;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  height: var(--nav-height);
 }
 
-.tab {
+.item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  padding: 8px 12px;
-  color: var(--text-muted);
+  gap: 0.2rem;
+  padding: var(--space-xs) var(--space-sm);
   text-decoration: none;
-  transition: color var(--transition);
+  color: var(--color-text-muted);
+  transition: color var(--duration-normal) var(--ease-out);
   -webkit-tap-highlight-color: transparent;
+  position: relative;
 }
 
-.tab:hover {
-  color: var(--text-secondary);
+.item svg {
+  transition: transform var(--duration-normal) var(--ease-spring);
 }
 
-.tab.active {
-  color: var(--accent, var(--text-bright));
+.item:hover {
+  color: var(--color-text-soft);
+}
+
+.active {
+  color: var(--color-primary);
+}
+
+.active svg {
+  transform: scale(1.1);
 }
 
 .label {
+  font-family: var(--font-serif);
   font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 400;
 }
 
+/* Desktop: side nav or hidden */
 @media (min-width: 768px) {
   .nav {
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+    display: none;
   }
 }

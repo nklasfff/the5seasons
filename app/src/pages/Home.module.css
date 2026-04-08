@@ -1,0 +1,355 @@
+/* =========================================
+   HOME — The living, breathing welcome
+   A meditation in scroll. Each section
+   breathes with generous white space.
+   ========================================= */
+
+.home {
+  min-height: 100dvh;
+  background: var(--color-bg);
+  transition: background-color var(--duration-ambient) ease;
+}
+
+/* === HERO — Full viewport opening === */
+.hero {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  padding: var(--space-xl) var(--space-md);
+}
+
+.heroCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  animation: fadeIn 1.2s var(--ease-out) both;
+}
+
+.character {
+  font-size: clamp(5rem, 14vw, 9rem);
+  font-weight: 300;
+  color: var(--color-season);
+  opacity: 0.15;
+  line-height: 1;
+  user-select: none;
+  animation: breathe 10s ease-in-out infinite;
+}
+
+.greeting {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 6vw, 3.5rem);
+  font-weight: 300;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.seasonLine {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  color: var(--color-season);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+.heroBottom {
+  position: absolute;
+  bottom: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  animation: fadeIn 1.6s var(--ease-out) 0.3s both;
+}
+
+.clock {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  color: var(--color-text-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.organLabel {
+  font-family: var(--font-serif);
+  font-size: 0.78rem;
+  color: var(--color-primary);
+  font-style: italic;
+  opacity: 0.6;
+}
+
+/* === DIVIDER === */
+.divider {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-xs) 0;
+}
+
+.dividerLine {
+  width: 48px;
+  height: 1px;
+  background: var(--color-divider-gradient);
+  opacity: 0.6;
+}
+
+/* === DYNAMIC STATE === */
+.state {
+  padding: var(--space-2xl) var(--space-md) var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-sm);
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
+
+.stateLabel {
+  font-family: var(--font-serif);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-lavendel);
+  font-weight: 400;
+}
+
+.stateText {
+  font-family: var(--font-serif);
+  font-size: clamp(1.05rem, 2.8vw, 1.25rem);
+  color: var(--color-text);
+  font-weight: 300;
+  max-width: 30ch;
+  line-height: 1.65;
+}
+
+.stateAdvice {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  color: var(--color-graablaa);
+  font-style: italic;
+  font-weight: 300;
+  max-width: 30ch;
+  line-height: 1.55;
+}
+
+/* === ORGAN MOMENT === */
+.moment {
+  padding: var(--space-2xl) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-sm);
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
+
+.momentText {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 3vw, 1.35rem);
+  color: var(--color-text);
+  font-weight: 300;
+  max-width: 28ch;
+  line-height: 1.65;
+}
+
+.momentQuality {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* === PRACTICE === */
+.practice {
+  padding: var(--space-2xl) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-xs);
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
+
+.sectionTag {
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-xs);
+}
+
+.practiceType {
+  font-family: var(--font-serif);
+  font-size: 0.82rem;
+  color: var(--color-lavendel);
+  font-style: italic;
+}
+
+.practiceTitle {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 400;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  max-width: 22ch;
+}
+
+.practiceDetail {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: var(--color-text-soft);
+  font-weight: 300;
+  max-width: 32ch;
+  line-height: 1.6;
+  margin-top: var(--space-3xs);
+}
+
+.badge {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+  margin-top: var(--space-sm);
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-pill);
+}
+
+.practiceLink {
+  font-family: var(--font-serif);
+  font-size: 0.78rem;
+  color: var(--color-primary);
+  text-decoration: none;
+  opacity: 0.6;
+  font-style: italic;
+  margin-top: var(--space-md);
+  padding: var(--space-xs) var(--space-sm);
+  border-bottom: 1px solid transparent;
+  transition: opacity var(--duration-fast) ease, border-color var(--duration-fast) ease;
+}
+
+.practiceLink:hover {
+  opacity: 0.9;
+  border-bottom-color: var(--color-primary);
+}
+
+/* === WISDOM === */
+.wisdom {
+  padding: var(--space-3xl) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.quote {
+  font-family: var(--font-serif);
+  font-size: clamp(1.05rem, 2.5vw, 1.2rem);
+  color: var(--color-text-soft);
+  font-weight: 300;
+  font-style: italic;
+  max-width: 32ch;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.wisdomLink {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  color: var(--color-primary);
+  text-decoration: none;
+  opacity: 0.5;
+  font-style: italic;
+  transition: opacity var(--duration-fast) ease;
+}
+
+.wisdomLink:hover {
+  opacity: 0.8;
+}
+
+/* === JOURNAL === */
+.journal {
+  padding: var(--space-2xl) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-sm);
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
+
+.journalText {
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem, 3.5vw, 1.5rem);
+  color: var(--color-text);
+  font-weight: 300;
+  max-width: 24ch;
+  line-height: 1.5;
+}
+
+/* === FOOD === */
+.food {
+  padding: var(--space-2xl) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-xs);
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
+
+.foodName {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--color-text);
+  margin-top: var(--space-xs);
+}
+
+.foodWhy {
+  font-family: var(--font-serif);
+  font-size: 0.92rem;
+  color: var(--color-text-soft);
+  font-weight: 300;
+  max-width: 32ch;
+  line-height: 1.65;
+}
+
+/* === CLOSING === */
+.closing {
+  padding: var(--space-3xl) var(--space-md) var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-md);
+}
+
+.closingText {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  font-weight: 300;
+  max-width: 28ch;
+  line-height: 1.6;
+}
+
+/* === RESPONSIVE === */
+@media (min-width: 768px) {
+  .home {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}

@@ -1,71 +1,71 @@
-import { NavLink } from 'react-router-dom';
-import { useSeason } from '../../context/SeasonContext';
-import styles from './BottomNav.module.css';
+import { NavLink } from 'react-router-dom'
+import styles from './BottomNav.module.css'
 
-const tabs = [
-  { path: '/hjem', label: 'Hjem', icon: HomeIcon },
-  { path: '/saesoner', label: 'Sæsoner', icon: SeasonsIcon },
-  { path: '/praksis', label: 'Praksis', icon: PracticeIcon },
-  { path: '/profil', label: 'Profil', icon: ProfileIcon },
-];
+const NAV_ITEMS = [
+  { to: '/', label: 'Hjem', icon: HomeIcon },
+  { to: '/saeson', label: 'Sæson', icon: SeasonIcon },
+  { to: '/praksis', label: 'Praksis', icon: PracticeIcon },
+  { to: '/univers', label: 'Univers', icon: UniversIcon },
+]
 
 export default function BottomNav() {
-  const { current } = useSeason();
-
   return (
-    <nav className={styles.nav} style={{ '--accent': current.color }}>
-      {tabs.map(({ path, label, icon: Icon }) => (
-        <NavLink
-          key={path}
-          to={path}
-          className={({ isActive }) => `${styles.tab} ${isActive ? styles.active : ''}`}
-        >
-          <Icon />
-          <span className={styles.label}>{label}</span>
-        </NavLink>
-      ))}
+    <nav className={styles.nav}>
+      <div className={styles.inner}>
+        {NAV_ITEMS.map(({ to, label, icon: Icon }) => (
+          <NavLink
+            key={to}
+            to={to}
+            end={to === '/'}
+            className={({ isActive }) =>
+              `${styles.item} ${isActive ? styles.active : ''}`
+            }
+          >
+            <Icon />
+            <span className={styles.label}>{label}</span>
+          </NavLink>
+        ))}
+      </div>
     </nav>
-  );
+  )
 }
 
+/* Minimal, elegant SVG icons */
 function HomeIcon() {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <circle cx="12" cy="12" r="9" />
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="12" cy="12" r="3" />
-      <line x1="12" y1="3" x2="12" y2="6" />
-      <line x1="12" y1="18" x2="12" y2="21" />
-      <line x1="3" y1="12" x2="6" y2="12" />
-      <line x1="18" y1="12" x2="21" y2="12" />
+      <circle cx="12" cy="12" r="8" opacity="0.3" />
     </svg>
-  );
+  )
 }
 
-function SeasonsIcon() {
+function SeasonIcon() {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <circle cx="12" cy="6" r="3" />
-      <circle cx="12" cy="18" r="3" />
-      <line x1="12" y1="9" x2="12" y2="15" />
-      <line x1="6" y1="12" x2="18" y2="12" strokeDasharray="2 2" />
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 3 C12 3, 4 10, 4 14 C4 18.4, 7.6 22, 12 22 C16.4 22, 20 18.4, 20 14 C20 10, 12 3, 12 3Z" opacity="0.4" />
+      <path d="M12 8 L12 16" />
+      <path d="M12 12 C10 10, 8 11, 7 13" />
     </svg>
-  );
+  )
 }
 
 function PracticeIcon() {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <circle cx="12" cy="12" r="9" />
-      <polyline points="12,7 12,12 16,14" />
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 4 C8 4, 4 7, 4 12 C4 17, 8 20, 12 20 C16 20, 20 17, 20 12" opacity="0.3" />
+      <circle cx="12" cy="12" r="2" fill="currentColor" opacity="0.5" />
+      <path d="M12 6 L12 10" />
     </svg>
-  );
+  )
 }
 
-function ProfileIcon() {
+function UniversIcon() {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <circle cx="12" cy="8" r="4" />
-      <path d="M4 20c0-4 4-6 8-6s8 2 8 6" />
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="9" opacity="0.2" />
+      <circle cx="12" cy="12" r="5" opacity="0.3" />
+      <circle cx="12" cy="12" r="1.5" fill="currentColor" opacity="0.5" />
     </svg>
-  );
+  )
 }

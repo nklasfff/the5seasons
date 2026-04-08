@@ -1,0 +1,328 @@
+/* =========================================
+   UNIVERS — Isabelle Evita's world
+   Her brand, her book, the philosophy
+   ========================================= */
+
+.page {
+  min-height: 100dvh;
+  background: var(--color-bg);
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+/* === BRAND HEADER === */
+.header {
+  padding: var(--space-2xl) 0 var(--space-xl);
+  text-align: center;
+}
+
+.brandName {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 7vw, 3.2rem);
+  font-weight: 300;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.tagline {
+  font-family: var(--font-serif);
+  font-size: 0.88rem;
+  color: var(--color-primary);
+  font-style: italic;
+  font-weight: 300;
+  margin-top: var(--space-xs);
+  letter-spacing: 0.06em;
+}
+
+/* === DIVIDER === */
+.divider {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-xs) 0;
+}
+
+.dividerLine {
+  width: 48px;
+  height: 1px;
+  background: var(--color-divider-gradient);
+  opacity: 0.6;
+}
+
+/* === SECTION TAG === */
+.sectionTag {
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  display: block;
+  text-align: center;
+  margin-bottom: var(--space-md);
+}
+
+/* === FIVE SEASONS WHEEL === */
+.wheel {
+  padding: var(--space-xl) 0 var(--space-2xl);
+  text-align: center;
+}
+
+.wheelIntro {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: var(--color-text-soft);
+  font-style: italic;
+  font-weight: 300;
+  margin-bottom: var(--space-lg);
+}
+
+.elements {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.element {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: var(--space-sm) var(--space-xs);
+  min-width: 60px;
+  opacity: 0.5;
+  transition: opacity var(--duration-normal) ease;
+}
+
+.elementActive {
+  opacity: 1;
+}
+
+.elementChar {
+  font-size: 1.6rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.elementName {
+  font-family: var(--font-serif);
+  font-size: 0.7rem;
+  color: var(--color-text);
+  font-weight: 400;
+}
+
+.elementDetail {
+  font-family: var(--font-serif);
+  font-size: 0.6rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.wheelNote {
+  font-family: var(--font-serif);
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin-top: var(--space-lg);
+}
+
+/* === BOOK === */
+.book {
+  padding: var(--space-2xl) 0;
+  text-align: center;
+}
+
+.bookTitle {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 400;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.bookSubtitle {
+  font-family: var(--font-serif);
+  font-size: 0.88rem;
+  color: var(--color-primary);
+  font-style: italic;
+  font-weight: 300;
+  margin-top: var(--space-xs);
+}
+
+.bookDescription {
+  font-family: var(--font-serif);
+  font-size: 0.92rem;
+  color: var(--color-text-soft);
+  font-weight: 300;
+  max-width: 30ch;
+  line-height: 1.7;
+  margin: var(--space-md) auto 0;
+}
+
+.bookMeta {
+  display: inline-block;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-top: var(--space-md);
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-pill);
+}
+
+/* === PHILOSOPHY === */
+.philosophy {
+  padding: var(--space-2xl) 0;
+  text-align: center;
+}
+
+.philosophyQuote {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 4vw, 1.8rem);
+  font-weight: 400;
+  color: var(--color-text);
+  font-style: italic;
+  line-height: 1.3;
+  margin-bottom: var(--space-md);
+}
+
+.philosophyText {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  color: var(--color-text-soft);
+  font-weight: 300;
+  max-width: 32ch;
+  line-height: 1.75;
+  margin: 0 auto;
+}
+
+/* === ELEMENTS DEEP === */
+.elementsDeep {
+  padding: var(--space-2xl) 0;
+}
+
+.elementCard {
+  padding: var(--space-md) 0;
+  opacity: 0.6;
+  transition: opacity var(--duration-normal) ease;
+}
+
+.elementCard + .elementCard {
+  border-top: 1px solid var(--color-divider);
+}
+
+.elementCardActive {
+  opacity: 1;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.cardName {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-text);
+}
+
+.cardOrgans {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.cardDirection {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+  margin-top: var(--space-xs);
+}
+
+.cardEmotion {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: var(--space-xs);
+  font-family: var(--font-serif);
+  font-size: 0.78rem;
+  color: var(--color-text-soft);
+}
+
+.cardBridge {
+  width: 20px;
+  height: 1px;
+  background: var(--color-divider-gradient);
+}
+
+.cardImbalanced {
+  color: var(--color-text-muted);
+}
+
+/* === PRACTICE FORMS === */
+.forms {
+  padding: var(--space-2xl) 0;
+}
+
+.formsList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+}
+
+.formItem {
+  padding: var(--space-sm);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.formTitle {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--color-text);
+  margin-bottom: 0.2rem;
+}
+
+.formDesc {
+  font-family: var(--font-serif);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  font-weight: 300;
+  line-height: 1.45;
+}
+
+/* === FOOTER === */
+.footer {
+  padding: var(--space-3xl) 0 var(--space-2xl);
+  text-align: center;
+}
+
+.footerText {
+  font-family: var(--font-serif);
+  font-size: 0.88rem;
+  color: var(--color-text);
+  font-weight: 400;
+}
+
+.footerSubtext {
+  font-family: var(--font-serif);
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin-top: 0.2rem;
+}
+
+.footerLink {
+  font-family: var(--font-serif);
+  font-size: 0.68rem;
+  color: var(--color-primary);
+  opacity: 0.6;
+  margin-top: var(--space-sm);
+  letter-spacing: 0.05em;
+}

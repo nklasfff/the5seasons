@@ -1,41 +1,26 @@
-import { HashRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
-import { SeasonProvider } from './context/SeasonContext';
-import AppShell from './components/layout/AppShell';
-import HomePage from './pages/HomePage';
-import SeasonsPage from './pages/SeasonsPage';
-import SeasonDetailPage from './pages/SeasonDetailPage';
-import PracticePage from './pages/PracticePage';
-import Journal from './components/practice/Journal';
-import Meditation from './components/practice/Meditation';
-import OrganClockPage from './components/practice/OrganClock';
-import ProfilePage from './pages/ProfilePage';
-
-function ScrollToTop() {
-  const { pathname } = useLocation();
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
-  return null;
-}
+import { Routes, Route } from 'react-router-dom'
+import { useTime } from './hooks/useTime'
+import { useSeason } from './hooks/useSeason'
+import { useDynamics } from './hooks/useDynamics'
+import AppShell from './components/layout/AppShell'
+import Home from './pages/Home'
+import Practice from './pages/Practice'
+import Season from './pages/Season'
+import Univers from './pages/Univers'
 
 export default function App() {
+  const time = useTime()
+  const season = useSeason()
+  const dynamics = useDynamics(time, season)
+
   return (
-    <HashRouter>
-      <SeasonProvider>
-        <ScrollToTop />
-        <AppShell>
-          <Routes>
-            <Route path="/hjem" element={<HomePage />} />
-            <Route path="/saesoner" element={<SeasonsPage />} />
-            <Route path="/saesoner/:id" element={<SeasonDetailPage />} />
-            <Route path="/praksis" element={<PracticePage />} />
-            <Route path="/praksis/journal" element={<Journal />} />
-            <Route path="/praksis/meditation" element={<Meditation />} />
-            <Route path="/praksis/organur" element={<OrganClockPage />} />
-            <Route path="/profil" element={<ProfilePage />} />
-            <Route path="*" element={<Navigate to="/hjem" replace />} />
-          </Routes>
-        </AppShell>
-      </SeasonProvider>
-    </HashRouter>
-  );
+    <AppShell time={time} season={season}>
+      <Routes>
+        <Route path="/" element={<Home time={time} season={season} dynamics={dynamics} />} />
+        <Route path="/saeson" element={<Season time={time} season={season} dynamics={dynamics} />} />
+        <Route path="/praksis" element={<Practice time={time} season={season} dynamics={dynamics} />} />
+        <Route path="/univers" element={<Univers season={season} />} />
+      </Routes>
+    </AppShell>
+  )
 }
