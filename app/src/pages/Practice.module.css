@@ -72,10 +72,17 @@
 
 /* === PRACTICE CARD === */
 .content {
-  padding: var(--space-xl) 0;
+  padding: var(--space-lg) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
 }
 
 .practiceCard {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg) var(--space-md);
   display: flex;
   flex-direction: column;
   align-items: center;
