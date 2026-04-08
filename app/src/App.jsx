@@ -4,9 +4,9 @@ import { useSeason } from './hooks/useSeason'
 import { useDynamics } from './hooks/useDynamics'
 import AppShell from './components/layout/AppShell'
 import Home from './pages/Home'
-import Practice from './pages/Practice'
 import Season from './pages/Season'
-import Univers from './pages/Univers'
+import Practice from './pages/Practice'
+import Elements from './pages/Elements'
 
 export default function App() {
   const time = useTime()
@@ -17,9 +17,9 @@ export default function App() {
     <AppShell time={time} season={season}>
       <Routes>
         <Route path="/" element={<Home time={time} season={season} dynamics={dynamics} />} />
-        <Route path="/saeson" element={<Season time={time} season={season} dynamics={dynamics} />} />
-        <Route path="/praksis" element={<Practice time={time} season={season} dynamics={dynamics} />} />
-        <Route path="/univers" element={<Univers season={season} />} />
+        <Route path="/saeson" element={<Season season={season} />} />
+        <Route path="/oevelser" element={<Practice time={time} season={season} />} />
+        <Route path="/elementer" element={<Elements season={season} />} />
       </Routes>
     </AppShell>
   )

@@ -1,8 +1,3 @@
-/* =========================================
-   BOTTOM NAV — Elegant, minimal tab bar
-   Floating glass effect on mobile
-   ========================================= */
-
 .nav {
   position: fixed;
   bottom: 0;
@@ -11,8 +6,8 @@
   z-index: 100;
   padding: 0 var(--space-sm) calc(var(--space-xs) + var(--safe-bottom));
   background: var(--color-bg-nav);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border-top: 1px solid var(--color-divider);
 }
 
@@ -29,39 +24,39 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.2rem;
+  gap: 0.3rem;
   padding: var(--space-xs) var(--space-sm);
   text-decoration: none;
   color: var(--color-text-muted);
   transition: color var(--duration-normal) var(--ease-out);
   -webkit-tap-highlight-color: transparent;
-  position: relative;
 }
 
-.item svg {
-  transition: transform var(--duration-normal) var(--ease-spring);
-}
-
-.item:hover {
-  color: var(--color-text-soft);
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.4;
+  transition: opacity var(--duration-normal) ease, transform var(--duration-normal) var(--ease-spring);
 }
 
 .active {
-  color: var(--color-primary);
+  color: var(--color-accent);
 }
 
-.active svg {
-  transform: scale(1.1);
+.active .dot {
+  opacity: 1;
+  transform: scale(1.3);
 }
 
 .label {
   font-family: var(--font-serif);
-  font-size: 0.65rem;
-  letter-spacing: 0.06em;
+  font-size: 0.62rem;
+  letter-spacing: 0.05em;
   font-weight: 400;
 }
 
-/* Desktop: side nav or hidden */
 @media (min-width: 768px) {
   .nav {
     display: none;

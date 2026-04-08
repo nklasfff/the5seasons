@@ -1,334 +1,188 @@
 /* =========================================
-   HOME — The living, breathing welcome
-   A meditation in scroll. Each section
-   breathes with generous white space.
+   I DAG — Today's warm daily guidance
+   One thing at a time. Gentle. Clear.
+   Like opening a beautiful morning journal.
    ========================================= */
 
-.home {
+.page {
   min-height: 100dvh;
   background: var(--color-bg);
-  transition: background-color var(--duration-ambient) ease;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
 }
 
-/* === HERO — Full viewport opening === */
-.hero {
-  min-height: 100dvh;
+/* === SEASONAL WELCOME === */
+.welcome {
+  padding: var(--space-3xl) 0 var(--space-2xl);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   text-align: center;
-  position: relative;
-  padding: var(--space-xl) var(--space-md);
+  animation: fadeUp 1s var(--ease-out) both;
 }
 
-.heroCenter {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-sm);
-  animation: fadeIn 1.2s var(--ease-out) both;
-}
-
-.character {
-  font-size: clamp(5rem, 14vw, 9rem);
-  font-weight: 300;
-  color: var(--color-season);
-  opacity: 0.15;
-  line-height: 1;
-  user-select: none;
-  animation: breathe 10s ease-in-out infinite;
+.welcomeIllustration {
+  margin-bottom: var(--space-sm);
 }
 
 .greeting {
   font-family: var(--font-serif);
-  font-size: clamp(2.2rem, 6vw, 3.5rem);
+  font-size: clamp(2rem, 6vw, 3rem);
   font-weight: 300;
   color: var(--color-text);
   letter-spacing: -0.02em;
   line-height: 1.1;
 }
 
-.seasonLine {
+.seasonLabel {
   font-family: var(--font-serif);
-  font-size: 0.85rem;
-  color: var(--color-season);
-  letter-spacing: 0.18em;
+  font-size: 0.82rem;
+  color: var(--color-accent);
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  font-weight: 400;
-  opacity: 0.7;
-}
-
-.heroBottom {
-  position: absolute;
-  bottom: var(--space-lg);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.2rem;
-  animation: fadeIn 1.6s var(--ease-out) 0.3s both;
-}
-
-.clock {
-  font-family: var(--font-sans);
-  font-size: 0.7rem;
-  letter-spacing: 0.25em;
-  color: var(--color-text-faint);
-  font-variant-numeric: tabular-nums;
-}
-
-.organLabel {
-  font-family: var(--font-serif);
-  font-size: 0.78rem;
-  color: var(--color-primary);
-  font-style: italic;
-  opacity: 0.6;
-}
-
-/* === DIVIDER === */
-.divider {
-  display: flex;
-  justify-content: center;
-  padding: var(--space-xs) 0;
-}
-
-.dividerLine {
-  width: 48px;
-  height: 1px;
-  background: var(--color-divider-gradient);
-  opacity: 0.6;
-}
-
-/* === DYNAMIC STATE === */
-.state {
-  padding: var(--space-2xl) var(--space-md) var(--space-xl);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: var(--space-sm);
-  max-width: var(--content-width);
-  margin: 0 auto;
-}
-
-.stateLabel {
-  font-family: var(--font-serif);
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--color-lavendel);
+  margin-top: var(--space-xs);
   font-weight: 400;
 }
 
-.stateText {
+.invitation {
   font-family: var(--font-serif);
-  font-size: clamp(1.05rem, 2.8vw, 1.25rem);
-  color: var(--color-text);
-  font-weight: 300;
-  max-width: 30ch;
-  line-height: 1.65;
-}
-
-.stateAdvice {
-  font-family: var(--font-serif);
-  font-size: 0.9rem;
-  color: var(--color-graablaa);
+  font-size: clamp(1rem, 2.5vw, 1.12rem);
+  color: var(--color-text-soft);
   font-style: italic;
   font-weight: 300;
-  max-width: 30ch;
-  line-height: 1.55;
-}
-
-/* === ORGAN MOMENT === */
-.moment {
-  padding: var(--space-2xl) var(--space-md);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: var(--space-sm);
-  max-width: var(--content-width);
-  margin: 0 auto;
-}
-
-.momentText {
-  font-family: var(--font-serif);
-  font-size: clamp(1.1rem, 3vw, 1.35rem);
-  color: var(--color-text);
-  font-weight: 300;
-  max-width: 28ch;
+  max-width: 26ch;
   line-height: 1.65;
+  margin-top: var(--space-md);
 }
 
-.momentQuality {
-  font-size: 0.65rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-}
-
-/* === PRACTICE === */
-.practice {
-  padding: var(--space-2xl) var(--space-md);
+/* === CARD — gentle container for each section === */
+.card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg) var(--space-md);
+  margin-bottom: var(--space-md);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   gap: var(--space-xs);
-  max-width: var(--content-width);
-  margin: 0 auto;
 }
 
-.sectionTag {
-  font-size: 0.6rem;
-  letter-spacing: 0.35em;
+.cardLabel {
+  font-size: 0.58rem;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
   color: var(--color-text-muted);
-  margin-bottom: var(--space-xs);
+  margin-bottom: var(--space-2xs);
 }
 
+.cardAction {
+  font-family: var(--font-serif);
+  font-size: 0.76rem;
+  color: var(--color-accent);
+  text-decoration: none;
+  font-style: italic;
+  opacity: 0.7;
+  margin-top: var(--space-sm);
+  transition: opacity var(--duration-fast) ease;
+}
+
+.cardAction:hover {
+  opacity: 1;
+}
+
+/* === PRACTICE === */
 .practiceType {
   font-family: var(--font-serif);
-  font-size: 0.82rem;
-  color: var(--color-lavendel);
+  font-size: 0.75rem;
+  color: var(--color-accent-soft);
   font-style: italic;
 }
 
 .practiceTitle {
   font-family: var(--font-serif);
-  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-size: clamp(1.3rem, 4vw, 1.7rem);
   font-weight: 400;
   color: var(--color-text);
-  letter-spacing: -0.01em;
-  line-height: 1.2;
-  max-width: 22ch;
+  line-height: 1.25;
+  max-width: 20ch;
 }
 
-.practiceDetail {
-  font-family: var(--font-serif);
-  font-size: 0.95rem;
-  color: var(--color-text-soft);
-  font-weight: 300;
-  max-width: 32ch;
-  line-height: 1.6;
-  margin-top: var(--space-3xs);
-}
-
-.badge {
-  font-size: 0.65rem;
-  letter-spacing: 0.12em;
-  color: var(--color-text-muted);
-  margin-top: var(--space-sm);
-  padding: 0.3rem 0.75rem;
+.practiceHint {
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: var(--color-text-faint);
+  padding: 0.25rem 0.6rem;
   border: 1px solid var(--color-divider);
   border-radius: var(--radius-pill);
 }
 
-.practiceLink {
-  font-family: var(--font-serif);
-  font-size: 0.78rem;
-  color: var(--color-primary);
-  text-decoration: none;
-  opacity: 0.6;
-  font-style: italic;
-  margin-top: var(--space-md);
-  padding: var(--space-xs) var(--space-sm);
-  border-bottom: 1px solid transparent;
-  transition: opacity var(--duration-fast) ease, border-color var(--duration-fast) ease;
-}
-
-.practiceLink:hover {
-  opacity: 0.9;
-  border-bottom-color: var(--color-primary);
-}
-
 /* === WISDOM === */
 .wisdom {
-  padding: var(--space-3xl) var(--space-md);
+  padding: var(--space-2xl) 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   gap: var(--space-md);
 }
 
-.quote {
+.wisdomQuote {
   font-family: var(--font-serif);
-  font-size: clamp(1.05rem, 2.5vw, 1.2rem);
+  font-size: clamp(1rem, 2.5vw, 1.12rem);
   color: var(--color-text-soft);
   font-weight: 300;
   font-style: italic;
-  max-width: 32ch;
-  line-height: 1.75;
-  text-align: center;
+  max-width: 28ch;
+  line-height: 1.8;
 }
 
 .wisdomLink {
   font-family: var(--font-serif);
-  font-size: 0.75rem;
-  color: var(--color-primary);
+  font-size: 0.72rem;
+  color: var(--color-accent);
   text-decoration: none;
-  opacity: 0.5;
+  opacity: 0.55;
   font-style: italic;
   transition: opacity var(--duration-fast) ease;
 }
 
 .wisdomLink:hover {
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
-/* === JOURNAL === */
-.journal {
-  padding: var(--space-2xl) var(--space-md);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: var(--space-sm);
-  max-width: var(--content-width);
-  margin: 0 auto;
-}
-
-.journalText {
+/* === REFLECTION === */
+.reflectionText {
   font-family: var(--font-serif);
-  font-size: clamp(1.15rem, 3.5vw, 1.5rem);
+  font-size: clamp(1.1rem, 3vw, 1.35rem);
   color: var(--color-text);
   font-weight: 300;
-  max-width: 24ch;
+  max-width: 22ch;
   line-height: 1.5;
 }
 
 /* === FOOD === */
-.food {
-  padding: var(--space-2xl) var(--space-md);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: var(--space-xs);
-  max-width: var(--content-width);
-  margin: 0 auto;
-}
-
 .foodName {
   font-family: var(--font-serif);
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 400;
   color: var(--color-text);
-  margin-top: var(--space-xs);
 }
 
-.foodWhy {
+.foodDescription {
   font-family: var(--font-serif);
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   color: var(--color-text-soft);
   font-weight: 300;
-  max-width: 32ch;
+  max-width: 28ch;
   line-height: 1.65;
 }
 
 /* === CLOSING === */
 .closing {
-  padding: var(--space-3xl) var(--space-md) var(--space-2xl);
+  padding: var(--space-3xl) 0 var(--space-2xl);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -336,20 +190,19 @@
   gap: var(--space-md);
 }
 
-.closingText {
+.closingMood {
   font-family: var(--font-serif);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--color-text-muted);
   font-style: italic;
   font-weight: 300;
-  max-width: 28ch;
+  max-width: 26ch;
   line-height: 1.6;
 }
 
-/* === RESPONSIVE === */
-@media (min-width: 768px) {
-  .home {
-    max-width: 600px;
-    margin: 0 auto;
-  }
+.closingPhilosophy {
+  font-family: var(--font-serif);
+  font-size: 0.72rem;
+  color: var(--color-text-faint);
+  letter-spacing: 0.08em;
 }

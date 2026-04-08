@@ -7,44 +7,36 @@
 }
 
 :root {
-  /* Isabelle Evita brand — warm, organic, premium */
-  --color-rosa: #C89494;
-  --color-lavendel: #B5A8C4;
-  --color-graablaa: #8B9B9C;
-  --color-sand: #D4C4B0;
-  --color-creme: #F0E8DF;
+  /* =========================================
+     ISABELLE EVITA — "Et Liv i Vækst"
+     Warm, organic, feminine, accessible.
+     Each season creates its own atmosphere.
+     ========================================= */
 
-  /* Primary = Rosa (her brand signature) */
-  --color-primary: var(--color-rosa);
-  --color-primary-light: #DBBCBC;
-  --color-primary-glow: rgba(200, 148, 148, 0.08);
+  /* Brand constants */
+  --color-brand: #C2967E;
+  --color-brand-light: #D4B5A0;
 
-  /* Surfaces */
-  --color-bg: #FAF8F6;
-  --color-bg-warm: #F8F5F2;
-  --color-bg-card: rgba(255, 255, 255, 0.5);
-  --color-bg-nav: rgba(250, 248, 246, 0.92);
+  /* Default surface & text (overridden per season) */
+  --color-bg: #F9F6F2;
+  --color-bg-soft: #F4F0EB;
+  --color-bg-card: rgba(255, 255, 255, 0.55);
+  --color-bg-nav: rgba(249, 246, 242, 0.92);
 
-  /* Text */
-  --color-text: #2A2A28;
-  --color-text-soft: #6B6B66;
-  --color-text-muted: #9E9E96;
-  --color-text-faint: #C0BDB8;
+  --color-text: #3A3632;
+  --color-text-soft: #6B6560;
+  --color-text-muted: #A09A94;
+  --color-text-faint: #C5BFB8;
 
-  /* Accents */
+  --color-accent: var(--color-brand);
+  --color-accent-soft: var(--color-brand-light);
   --color-divider: rgba(0, 0, 0, 0.05);
-  --color-divider-gradient: linear-gradient(90deg, transparent, var(--color-rosa), var(--color-lavendel), transparent);
 
-  /* Season accent — overridden per season */
-  --color-season: var(--color-rosa);
-  --color-season-light: var(--color-primary-light);
-  --color-season-glow: var(--color-primary-glow);
-
-  /* Typography */
+  /* Typography — like her book */
   --font-serif: 'Cormorant Garamond', 'Georgia', serif;
   --font-sans: -apple-system, 'Helvetica Neue', 'Segoe UI', sans-serif;
 
-  /* Spacing — generous, airy rhythm */
+  /* Generous spacing — breathing room */
   --space-3xs: 0.25rem;
   --space-2xs: 0.375rem;
   --space-xs: 0.5rem;
@@ -57,13 +49,9 @@
 
   /* Radii */
   --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
   --radius-pill: 100px;
-
-  /* Shadows */
-  --shadow-soft: 0 2px 20px rgba(0, 0, 0, 0.04);
-  --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.06);
 
   /* Transitions */
   --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
@@ -71,40 +59,111 @@
   --duration-fast: 0.2s;
   --duration-normal: 0.4s;
   --duration-slow: 0.8s;
-  --duration-ambient: 2s;
 
   /* Layout */
-  --content-width: 480px;
-  --nav-height: 72px;
+  --content-width: 440px;
+  --nav-height: 68px;
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-/* Season accent colors */
+/* =========================================
+   SEASON ATMOSPHERES
+   Each season is a complete visual world.
+   Not just an accent — a whole mood.
+   ========================================= */
+
+/* FORÅR / SPRING — Fresh growth, upward energy, morning light */
 [data-season="foraar"] {
-  --color-season: #5B8C5A;
-  --color-season-light: #A3C9A8;
-  --color-season-glow: rgba(91, 140, 90, 0.06);
+  --color-bg: #F5F8F3;
+  --color-bg-soft: #EFF3EC;
+  --color-bg-card: rgba(245, 248, 243, 0.6);
+  --color-bg-nav: rgba(245, 248, 243, 0.92);
+  --color-accent: #6B8F5E;
+  --color-accent-soft: #A4C49A;
+  --color-divider: rgba(107, 143, 94, 0.08);
 }
+
+/* SOMMER / SUMMER — Warm radiance, open heart, golden light */
 [data-season="sommer"] {
-  --color-season: #C75A3A;
-  --color-season-light: #E8A090;
-  --color-season-glow: rgba(199, 90, 58, 0.06);
+  --color-bg: #FAF5F0;
+  --color-bg-soft: #F5EDE5;
+  --color-bg-card: rgba(250, 245, 240, 0.6);
+  --color-bg-nav: rgba(250, 245, 240, 0.92);
+  --color-accent: #C27052;
+  --color-accent-soft: #DEAA96;
+  --color-divider: rgba(194, 112, 82, 0.08);
 }
+
+/* SENSOMMER / LATE SUMMER — Honey warmth, harvest, grounded */
 [data-season="sensommer"] {
-  --color-season: #C9A84C;
-  --color-season-light: #E0CFA0;
-  --color-season-glow: rgba(201, 168, 76, 0.06);
+  --color-bg: #FAF7EE;
+  --color-bg-soft: #F5F0E3;
+  --color-bg-card: rgba(250, 247, 238, 0.6);
+  --color-bg-nav: rgba(250, 247, 238, 0.92);
+  --color-accent: #B8963E;
+  --color-accent-soft: #D4C08A;
+  --color-divider: rgba(184, 150, 62, 0.08);
 }
+
+/* EFTERÅR / AUTUMN — Cool clarity, silver air, letting go */
 [data-season="efteraar"] {
-  --color-season: #A8A8A0;
-  --color-season-light: #D0CEC8;
-  --color-season-glow: rgba(168, 168, 160, 0.06);
+  --color-bg: #F5F5F3;
+  --color-bg-soft: #EEEDEA;
+  --color-bg-card: rgba(245, 245, 243, 0.6);
+  --color-bg-nav: rgba(245, 245, 243, 0.92);
+  --color-accent: #8A8A80;
+  --color-accent-soft: #B8B6AE;
+  --color-divider: rgba(138, 138, 128, 0.08);
 }
+
+/* VINTER / WINTER — Deep stillness, indigo depth, inner wisdom */
 [data-season="vinter"] {
-  --color-season: #3A6FA0;
-  --color-season-light: #8BB0D0;
-  --color-season-glow: rgba(58, 111, 160, 0.06);
+  --color-bg: #F0F3F7;
+  --color-bg-soft: #E8ECF2;
+  --color-bg-card: rgba(240, 243, 247, 0.6);
+  --color-bg-nav: rgba(240, 243, 247, 0.92);
+  --color-accent: #4A6E8C;
+  --color-accent-soft: #8AAABE;
+  --color-divider: rgba(74, 110, 140, 0.08);
 }
+
+/* =========================================
+   TIME-OF-DAY MODIFIERS
+   Subtle shifts — evening and night only
+   ========================================= */
+
+[data-time="evening"] {
+  --color-text: #3A3632;
+  --color-text-soft: #5C5852;
+}
+
+[data-time="night"] {
+  --color-bg: #1E1D1B;
+  --color-bg-soft: #252422;
+  --color-bg-card: rgba(255, 255, 255, 0.04);
+  --color-bg-nav: rgba(30, 29, 27, 0.95);
+  --color-text: #E2DED8;
+  --color-text-soft: #9E9A94;
+  --color-text-muted: #6A6660;
+  --color-text-faint: #4A4642;
+  --color-divider: rgba(255, 255, 255, 0.06);
+}
+
+[data-time="latenight"] {
+  --color-bg: #181715;
+  --color-bg-soft: #1E1D1B;
+  --color-bg-card: rgba(255, 255, 255, 0.03);
+  --color-bg-nav: rgba(24, 23, 21, 0.95);
+  --color-text: #D5D0CA;
+  --color-text-soft: #8A8680;
+  --color-text-muted: #5E5A54;
+  --color-text-faint: #3E3C38;
+  --color-divider: rgba(255, 255, 255, 0.05);
+}
+
+/* =========================================
+   BASE STYLES
+   ========================================= */
 
 html {
   font-size: 16px;
@@ -120,6 +179,7 @@ body {
   line-height: 1.6;
   min-height: 100dvh;
   overflow-x: hidden;
+  transition: background-color 1.5s ease, color 0.8s ease;
 }
 
 #root {
@@ -128,104 +188,28 @@ body {
   flex-direction: column;
 }
 
-/* Hide scrollbar but keep scrolling */
-::-webkit-scrollbar {
-  width: 0;
-}
+::-webkit-scrollbar { width: 0; }
 
-/* Selection color */
 ::selection {
-  background: var(--color-primary-light);
+  background: var(--color-accent-soft);
   color: var(--color-text);
 }
 
-/* Smooth transitions for ambient changes */
-body, #root {
-  transition: background-color var(--duration-ambient) ease, color 1s ease;
-}
-
 /* =========================================
-   TIME-OF-DAY THEMES
-   Subtle, elegant shifts throughout the day
-   ========================================= */
-
-[data-time="dawn"] {
-  --color-bg: #FAF7F4;
-  --color-bg-warm: #F8F4F0;
-  --color-bg-nav: rgba(250, 247, 244, 0.92);
-}
-
-[data-time="morning"] {
-  --color-bg: #FAF8F6;
-  --color-bg-warm: #F8F5F2;
-  --color-bg-nav: rgba(250, 248, 246, 0.92);
-}
-
-[data-time="midday"] {
-  --color-bg: #FAF8F6;
-  --color-bg-warm: #F8F5F2;
-  --color-bg-nav: rgba(250, 248, 246, 0.92);
-}
-
-[data-time="afternoon"] {
-  --color-bg: #F9F6F3;
-  --color-bg-warm: #F6F2EE;
-  --color-bg-nav: rgba(249, 246, 243, 0.92);
-}
-
-[data-time="evening"] {
-  --color-bg: #F0EDEA;
-  --color-bg-warm: #EBE7E3;
-  --color-bg-nav: rgba(240, 237, 234, 0.92);
-  --color-text: #2A2A28;
-  --color-text-soft: #5C5C58;
-}
-
-[data-time="night"] {
-  --color-bg: #1E1D1C;
-  --color-bg-warm: #1A1918;
-  --color-bg-nav: rgba(30, 29, 28, 0.95);
-  --color-bg-card: rgba(255, 255, 255, 0.04);
-  --color-text: #E8E6E2;
-  --color-text-soft: #A09A96;
-  --color-text-muted: #6E6A68;
-  --color-text-faint: #4A4846;
-  --color-divider: rgba(255, 255, 255, 0.06);
-  --color-divider-gradient: linear-gradient(90deg, transparent, rgba(200, 148, 148, 0.3), rgba(181, 168, 196, 0.3), transparent);
-  --shadow-soft: 0 2px 20px rgba(0, 0, 0, 0.2);
-  --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.3);
-}
-
-[data-time="latenight"] {
-  --color-bg: #171615;
-  --color-bg-warm: #141312;
-  --color-bg-nav: rgba(23, 22, 21, 0.95);
-  --color-bg-card: rgba(255, 255, 255, 0.03);
-  --color-text: #D8D4D0;
-  --color-text-soft: #8A8684;
-  --color-text-muted: #5E5A58;
-  --color-text-faint: #3E3C3A;
-  --color-divider: rgba(255, 255, 255, 0.05);
-  --color-divider-gradient: linear-gradient(90deg, transparent, rgba(200, 148, 148, 0.2), rgba(181, 168, 196, 0.2), transparent);
-  --shadow-soft: 0 2px 20px rgba(0, 0, 0, 0.3);
-  --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.4);
-}
-
-/* =========================================
-   UTILITY ANIMATIONS
+   ANIMATIONS
    ========================================= */
 
 @keyframes breathe {
-  0%, 100% { opacity: 0.15; transform: scale(1); }
-  50% { opacity: 0.28; transform: scale(1.015); }
+  0%, 100% { opacity: 0.12; transform: scale(1); }
+  50% { opacity: 0.22; transform: scale(1.01); }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes fadeInSlow {
+@keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }

@@ -1,27 +1,24 @@
 /* =========================================
-   PRACTICE — Deep engagement
-   Guided, airy, generous spacing
+   ØVELSER — Guided practice.
+   Choose your practice, then immerse.
    ========================================= */
 
 .page {
   min-height: 100dvh;
   background: var(--color-bg);
-  padding-bottom: var(--space-xl);
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
 }
 
-/* === HEADER === */
 .header {
-  padding: var(--space-2xl) var(--space-md) var(--space-xl);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: var(--space-2xl) 0 var(--space-lg);
   text-align: center;
-  gap: var(--space-xs);
 }
 
 .title {
   font-family: var(--font-serif);
-  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-size: clamp(2rem, 5vw, 2.5rem);
   font-weight: 300;
   color: var(--color-text);
   letter-spacing: -0.02em;
@@ -29,106 +26,125 @@
 
 .subtitle {
   font-family: var(--font-serif);
-  font-size: 0.95rem;
-  color: var(--color-text-soft);
-  font-style: italic;
-  font-weight: 300;
-  max-width: 28ch;
-  line-height: 1.5;
+  font-size: 0.78rem;
+  color: var(--color-accent);
+  opacity: 0.6;
+  letter-spacing: 0.1em;
+  margin-top: var(--space-xs);
 }
 
-.seasonContext {
+/* === TABS === */
+.tabs {
+  display: flex;
+  gap: 0.3rem;
+  overflow-x: auto;
+  padding-bottom: var(--space-xs);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.tabs::-webkit-scrollbar { display: none; }
+
+.tab {
+  all: unset;
+  cursor: pointer;
   font-family: var(--font-serif);
   font-size: 0.72rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color-season);
-  opacity: 0.5;
-  margin-top: var(--space-3xs);
+  color: var(--color-text-muted);
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  transition: all var(--duration-fast) ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* === DIVIDER === */
-.divider {
-  display: flex;
-  justify-content: center;
-  padding: var(--space-xs) 0;
+.tab:hover {
+  color: var(--color-text-soft);
+  border-color: var(--color-accent-soft);
 }
 
-.dividerLine {
-  width: 48px;
-  height: 1px;
-  background: var(--color-divider-gradient);
-  opacity: 0.6;
+.tabActive {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  background: var(--color-bg-card);
 }
 
-/* === SECTION === */
-.section {
-  padding: var(--space-2xl) var(--space-md);
+/* === PRACTICE CARD === */
+.content {
+  padding: var(--space-xl) 0;
+}
+
+.practiceCard {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   gap: var(--space-xs);
-  max-width: var(--content-width);
-  margin: 0 auto;
 }
 
-.label {
-  font-size: 0.6rem;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-}
-
-.sectionTitle {
+.practiceTitle {
   font-family: var(--font-serif);
-  font-size: clamp(1.3rem, 3.5vw, 1.7rem);
+  font-size: clamp(1.3rem, 4vw, 1.7rem);
   font-weight: 400;
   color: var(--color-text);
-  line-height: 1.3;
-  max-width: 26ch;
+  line-height: 1.25;
+  max-width: 22ch;
 }
 
-.teaser {
+.practiceMeta {
   font-family: var(--font-serif);
-  font-size: 0.88rem;
-  color: var(--color-lavendel);
+  font-size: 0.78rem;
+  color: var(--color-accent-soft);
   font-style: italic;
-  font-weight: 300;
-  max-width: 30ch;
-  line-height: 1.55;
+  max-width: 28ch;
+  line-height: 1.5;
 }
 
-.badge {
-  font-size: 0.62rem;
-  letter-spacing: 0.15em;
-  color: var(--color-text-muted);
-  margin-top: var(--space-sm);
-  padding: 0.25rem 0.65rem;
-  border: 1px solid var(--color-divider);
-  border-radius: var(--radius-pill);
-}
-
-.body {
+.revealHint {
   font-family: var(--font-serif);
-  font-size: 0.92rem;
+  font-size: 0.72rem;
+  color: var(--color-accent);
+  opacity: 0.55;
+  font-style: italic;
+}
+
+.practiceBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-sm);
+}
+
+.instruction {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
   color: var(--color-text-soft);
   font-weight: 300;
-  max-width: 38ch;
-  line-height: 1.7;
-  margin-top: var(--space-xs);
+  max-width: 34ch;
+  line-height: 1.75;
   text-align: left;
 }
 
 .effect {
   font-family: var(--font-serif);
   font-size: 0.82rem;
-  color: var(--color-graablaa);
-  font-weight: 300;
+  color: var(--color-accent);
   font-style: italic;
-  max-width: 34ch;
+  font-weight: 300;
+  max-width: 32ch;
   line-height: 1.6;
-  margin-top: var(--space-sm);
+  opacity: 0.75;
+}
+
+.badge {
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  color: var(--color-text-faint);
+  padding: 0.22rem 0.55rem;
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-pill);
 }
 
 /* === MEDITATION STEPS === */
@@ -137,9 +153,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
-  margin-top: var(--space-md);
   width: 100%;
-  max-width: 380px;
+  max-width: 340px;
 }
 
 .step {
@@ -151,18 +166,18 @@
 
 .stepNum {
   font-family: var(--font-serif);
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 300;
-  color: var(--color-season);
+  color: var(--color-accent);
   opacity: 0.35;
   line-height: 1.2;
   flex-shrink: 0;
-  width: 1.4rem;
+  width: 1.2rem;
 }
 
 .stepText {
   font-family: var(--font-serif);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   color: var(--color-text-soft);
   font-weight: 300;
   line-height: 1.65;
@@ -171,14 +186,13 @@
 /* === EFT === */
 .eftSetup {
   font-family: var(--font-serif);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   color: var(--color-text);
   font-weight: 300;
   font-style: italic;
-  max-width: 32ch;
+  max-width: 30ch;
   line-height: 1.6;
-  margin-top: var(--space-sm);
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-sm);
 }
 
 .eftPoints {
@@ -186,7 +200,7 @@
   flex-direction: column;
   gap: var(--space-md);
   width: 100%;
-  max-width: 360px;
+  max-width: 340px;
 }
 
 .eftPoint {
@@ -196,52 +210,43 @@
   text-align: left;
 }
 
-.eftDot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--color-season);
-  opacity: 0.3;
+.eftNum {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--color-accent);
+  opacity: 0.4;
   flex-shrink: 0;
-  margin-top: 0.5rem;
+  width: 1rem;
+  line-height: 1.2;
 }
 
 .eftLocation {
-  font-size: 0.62rem;
-  letter-spacing: 0.22em;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: var(--color-text-faint);
 }
 
 .eftAffirmation {
   font-family: var(--font-serif);
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   color: var(--color-text-soft);
   font-weight: 300;
   line-height: 1.55;
-  margin-top: 0.12rem;
+  margin-top: 0.1rem;
 }
 
 /* === CLOSING === */
 .closing {
-  padding: var(--space-3xl) var(--space-md) var(--space-2xl);
-  display: flex;
-  justify-content: center;
+  padding: var(--space-3xl) 0 var(--space-2xl);
   text-align: center;
 }
 
 .closingText {
   font-family: var(--font-serif);
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   color: var(--color-text-muted);
   font-style: italic;
   font-weight: 300;
-}
-
-/* === RESPONSIVE === */
-@media (min-width: 768px) {
-  .page {
-    max-width: 600px;
-    margin: 0 auto;
-  }
 }

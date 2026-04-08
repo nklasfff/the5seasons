@@ -6,7 +6,6 @@ import styles from './AppShell.module.css'
 export default function AppShell({ children, time, season }) {
   const location = useLocation()
 
-  // Scroll to top on route change
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' })
   }, [location.pathname])
@@ -17,14 +16,13 @@ export default function AppShell({ children, time, season }) {
       data-time={time.timeOfDay}
       data-season={season.current.id}
     >
-      {/* Desktop top bar */}
       <header className={styles.topBar}>
-        <span className={styles.brand}>Isabelle Evita</span>
+        <span className={styles.brand}>De 5 Årstiders Energi</span>
         <nav className={styles.desktopNav}>
-          <NavLink to="/" end className={({ isActive }) => `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`}>Hjem</NavLink>
-          <NavLink to="/saeson" className={({ isActive }) => `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`}>Sæson</NavLink>
-          <NavLink to="/praksis" className={({ isActive }) => `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`}>Praksis</NavLink>
-          <NavLink to="/univers" className={({ isActive }) => `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`}>Univers</NavLink>
+          <NavLink to="/" end className={({ isActive }) => `${styles.navLink} ${isActive ? styles.navActive : ''}`}>I dag</NavLink>
+          <NavLink to="/saeson" className={({ isActive }) => `${styles.navLink} ${isActive ? styles.navActive : ''}`}>Sæsonen</NavLink>
+          <NavLink to="/oevelser" className={({ isActive }) => `${styles.navLink} ${isActive ? styles.navActive : ''}`}>Øvelser</NavLink>
+          <NavLink to="/elementer" className={({ isActive }) => `${styles.navLink} ${isActive ? styles.navActive : ''}`}>Elementer</NavLink>
         </nav>
         <span className={styles.tagline}>Et Liv i Vækst</span>
       </header>

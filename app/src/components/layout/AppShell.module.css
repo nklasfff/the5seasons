@@ -1,18 +1,11 @@
-/* =========================================
-   APP SHELL — The containing frame
-   Desktop: centered with top brand bar + nav
-   Mobile: full-width with bottom nav
-   ========================================= */
-
 .shell {
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
   background: var(--color-bg);
-  transition: background-color var(--duration-ambient) ease;
+  transition: background-color 1.5s ease;
 }
 
-/* Desktop top bar — hidden on mobile */
 .topBar {
   display: none;
 }
@@ -26,13 +19,10 @@
   padding-bottom: calc(var(--nav-height) + var(--safe-bottom) + var(--space-sm));
 }
 
-/* Desktop layout */
 @media (min-width: 768px) {
   .shell {
-    max-width: 600px;
+    max-width: 560px;
     margin: 0 auto;
-    min-height: 100dvh;
-    position: relative;
   }
 
   .topBar {
@@ -44,18 +34,17 @@
     top: 0;
     z-index: 50;
     background: var(--color-bg-nav);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     border-bottom: 1px solid var(--color-divider);
   }
 
   .brand {
     font-family: var(--font-serif);
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     font-weight: 400;
     color: var(--color-text);
-    letter-spacing: 0.04em;
-    flex-shrink: 0;
+    letter-spacing: 0.02em;
   }
 
   .desktopNav {
@@ -66,29 +55,26 @@
 
   .navLink {
     font-family: var(--font-serif);
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     color: var(--color-text-muted);
     text-decoration: none;
-    letter-spacing: 0.04em;
     transition: color var(--duration-fast) ease;
-    padding: var(--space-3xs) 0;
   }
 
   .navLink:hover {
     color: var(--color-text-soft);
   }
 
-  .navLinkActive {
-    color: var(--color-primary);
+  .navActive {
+    color: var(--color-accent);
   }
 
   .tagline {
     font-family: var(--font-serif);
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-style: italic;
     font-weight: 300;
     color: var(--color-text-muted);
-    flex-shrink: 0;
   }
 
   .content {

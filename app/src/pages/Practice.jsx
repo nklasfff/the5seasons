@@ -1,90 +1,85 @@
-import { useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import { dailyRotation } from '../hooks/useSeason'
 import Reveal from '../components/Reveal'
-import SeasonIllustration from '../components/illustrations/SeasonIllustration'
 import styles from './Practice.module.css'
+
+/*
+ * "Øvelser" — Guided practice.
+ *
+ * Feels like she's leading you through it.
+ * Tabs to choose type, then one focused experience.
+ * Not a list to scan — a place to practice.
+ */
+
+const TABS = [
+  { key: 'breathing', label: 'Åndedræt' },
+  { key: 'yoga', label: 'Yoga' },
+  { key: 'meditation', label: 'Meditation' },
+  { key: 'acupressure', label: 'Akupressur' },
+  { key: 'eft', label: 'EFT' },
+]
 
 export default function Practice({ time, season }) {
   const { current, deep } = season
-  const { hour, mood } = time
+  const { mood } = time
+  const [activeTab, setActiveTab] = useState('breathing')
 
+  const breathing = useMemo(() => dailyRotation(deep?.breathingExercises), [deep])
   const yoga = useMemo(() => dailyRotation(deep?.yogaSequence), [deep])
   const meditation = useMemo(() => dailyRotation(deep?.meditations), [deep])
-  const breathing = useMemo(() => dailyRotation(deep?.breathingExercises), [deep])
   const acupressure = useMemo(() => dailyRotation(deep?.acupressure), [deep])
   const eft = deep?.eftSequence
-
-  const timeContext = useMemo(() => {
-    if (hour >= 5 && hour < 11) return 'Morgenen kalder på åndedræt og bevægelse'
-    if (hour >= 11 && hour < 15) return 'Middagen inviterer til stilhed'
-    if (hour >= 15 && hour < 18) return 'Eftermiddagen beder om blid berøring'
-    if (hour >= 18 && hour < 22) return 'Aftenen kalder på ro og refleksion'
-    return 'Natten hviler. Vend tilbage i morgen.'
-  }, [hour])
 
   return (
     <div className={styles.page}>
 
       <header className={styles.header}>
-        <SeasonIllustration element={current.element} variant={3} size={48} opacity={0.25} />
-        <h1 className={styles.title}>Praksis</h1>
-        <p className={styles.subtitle}>{timeContext}</p>
-        <p className={styles.seasonContext}>{current.name} · {current.element}</p>
+        <h1 className={styles.title}>Øvelser</h1>
+        <p className={styles.subtitle}>{current.name} · {current.element}</p>
       </header>
 
-      {/* === BREATHING === */}
-      {breathing && (
-        <section className={styles.section}>
-          <Reveal
-            preview={
-              <>
-                <span className={styles.label}>Åndedræt</span>
-                <h2 className={styles.sectionTitle}>{breathing.title}</h2>
-                <p className={styles.teaser}>{breathing.rhythm}</p>
-              </>
-            }
+      {/* === PRACTICE TYPE TABS === */}
+      <div className={styles.tabs}>
+        {TABS.map(({ key, label }) => (
+          <button
+            key={key}
+            className={`${styles.tab} ${activeTab === key ? styles.tabActive : ''}`}
+            onClick={() => setActiveTab(key)}
           >
-            <p className={styles.body}>{breathing.instruction}</p>
+            {label}
+          </button>
+        ))}
+      </div>
+
+      {/* === PRACTICE CONTENT === */}
+      <div className={styles.content}>
+
+        {activeTab === 'breathing' && breathing && (
+          <PracticeCard
+            title={breathing.title}
+            meta={breathing.rhythm}
+          >
+            <p className={styles.instruction}>{breathing.instruction}</p>
             <p className={styles.effect}>{breathing.effect}</p>
             <span className={styles.badge}>{breathing.rounds} runder</span>
-          </Reveal>
-        </section>
-      )}
+          </PracticeCard>
+        )}
 
-      <Divider />
-
-      {/* === YOGA === */}
-      {yoga && (
-        <section className={styles.section}>
-          <Reveal
-            preview={
-              <>
-                <span className={styles.label}>Yoga</span>
-                <h2 className={styles.sectionTitle}>{yoga.name}</h2>
-                {yoga.sanskrit && <p className={styles.teaser}>{yoga.sanskrit}</p>}
-              </>
-            }
+        {activeTab === 'yoga' && yoga && (
+          <PracticeCard
+            title={yoga.name}
+            meta={yoga.sanskrit}
           >
-            <p className={styles.body}>{yoga.instruction}</p>
+            <p className={styles.instruction}>{yoga.instruction}</p>
             <p className={styles.effect}>{yoga.benefit}</p>
             <span className={styles.badge}>{yoga.duration}</span>
-          </Reveal>
-        </section>
-      )}
+          </PracticeCard>
+        )}
 
-      <Divider />
-
-      {/* === MEDITATION === */}
-      {meditation && (
-        <section className={styles.section}>
-          <Reveal
-            preview={
-              <>
-                <span className={styles.label}>Meditation</span>
-                <h2 className={styles.sectionTitle}>{meditation.title}</h2>
-                <p className={styles.teaser}>{meditation.intention}</p>
-              </>
-            }
+        {activeTab === 'meditation' && meditation && (
+          <PracticeCard
+            title={meditation.title}
+            meta={meditation.intention}
           >
             <ol className={styles.steps}>
               {meditation.steps.map((step, i) => (
@@ -95,51 +90,31 @@ export default function Practice({ time, season }) {
               ))}
             </ol>
             <span className={styles.badge}>{meditation.duration}</span>
-          </Reveal>
-        </section>
-      )}
+          </PracticeCard>
+        )}
 
-      <Divider />
-
-      {/* === ACUPRESSURE === */}
-      {acupressure && (
-        <section className={styles.section}>
-          <Reveal
-            preview={
-              <>
-                <span className={styles.label}>Akupressur</span>
-                <h2 className={styles.sectionTitle}>{acupressure.name}</h2>
-                {acupressure.chineseName && <p className={styles.teaser}>{acupressure.chineseName}</p>}
-              </>
-            }
+        {activeTab === 'acupressure' && acupressure && (
+          <PracticeCard
+            title={acupressure.name}
+            meta={acupressure.chineseName}
           >
-            <p className={styles.body}>{acupressure.location}</p>
-            <p className={styles.body}>{acupressure.technique}</p>
+            <p className={styles.instruction}>{acupressure.location}</p>
+            <p className={styles.instruction}>{acupressure.technique}</p>
             <p className={styles.effect}>{acupressure.benefit}</p>
             <span className={styles.badge}>{acupressure.duration}</span>
-          </Reveal>
-        </section>
-      )}
+          </PracticeCard>
+        )}
 
-      <Divider />
-
-      {/* === EFT TAPPING === */}
-      {eft && (
-        <section className={styles.section}>
-          <Reveal
-            preview={
-              <>
-                <span className={styles.label}>EFT Tapping</span>
-                <h2 className={styles.sectionTitle}>{current.element}-elementets tapping</h2>
-                <p className={styles.teaser}>8 akupunkturpunkter med affirmationer</p>
-              </>
-            }
+        {activeTab === 'eft' && eft && (
+          <PracticeCard
+            title={`${current.element}-elementets tapping`}
+            meta="8 akupunkturpunkter"
           >
             <p className={styles.eftSetup}>{eft.setupPhrase}</p>
             <div className={styles.eftPoints}>
               {eft.points.map((p, i) => (
                 <div key={i} className={styles.eftPoint}>
-                  <span className={styles.eftDot} />
+                  <span className={styles.eftNum}>{i + 1}</span>
                   <div>
                     <span className={styles.eftLocation}>{p.point}</span>
                     <p className={styles.eftAffirmation}>{p.affirmation}</p>
@@ -147,9 +122,9 @@ export default function Practice({ time, season }) {
                 </div>
               ))}
             </div>
-          </Reveal>
-        </section>
-      )}
+          </PracticeCard>
+        )}
+      </div>
 
       <footer className={styles.closing}>
         <p className={styles.closingText}>{mood.message}</p>
@@ -158,6 +133,16 @@ export default function Practice({ time, season }) {
   )
 }
 
-function Divider() {
-  return <div className={styles.divider}><div className={styles.dividerLine} /></div>
+function PracticeCard({ title, meta, children }) {
+  return (
+    <div className={styles.practiceCard}>
+      <h2 className={styles.practiceTitle}>{title}</h2>
+      {meta && <p className={styles.practiceMeta}>{meta}</p>}
+      <Reveal preview={<span className={styles.revealHint}>Start øvelsen</span>}>
+        <div className={styles.practiceBody}>
+          {children}
+        </div>
+      </Reveal>
+    </div>
+  )
 }
